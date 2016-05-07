@@ -48,4 +48,26 @@ public class SortDefense extends Capacite implements Defense {
 		return EFF;
 	}
 
+	public int getPUI() {
+		return PUI;
+	}
+
+	public void setPUI(int pUI) {
+		PUI = pUI;
+	}
+
+	public int getFAC() {
+		return FAC;
+	}
+
+	public void setFAC(int fAC) {
+		FAC = fAC;
+	}
+
+	@Override
+	public String toString() {
+		return "SortDefense [PUI=" + PUI + ", FAC=" + FAC + ", nom=" + nom
+				+ ", PBA=" + PBA + ", EFF=" + EFF + "]";
+	}
+
 }
