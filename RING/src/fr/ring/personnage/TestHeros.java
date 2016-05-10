@@ -5,20 +5,80 @@ public class TestHeros{
 
 	public static void main(String[] args) {
 		
-		Guerrier heroA = new Guerrier();
-		Guerrier heroB = new Guerrier("Aminn", 50, 45, 80, 20);
+		Guerrier heroG = new Guerrier ("GerryBoy", 50, 40, 29, 18);
+		Magicien heroM = new Magicien ("Jaina", 10, 15, 35, 30);
+		Chasseur heroC = new Chasseur ("Huntard", 20, 20, 20, 20);
+	
+		// test du toString
+		System.out.println("Test du toString\n");
+		
+		String testG = heroG.toString();
+		String testM = heroM.toString();
+		String testC = heroC.toString();
+		
+		System.out.println(testG);
+		System.out.println(testM);
+		System.out.println(testC);
+		System.out.println("\n");
 
-		String sa, sb;
-		sa = heroA.toString();
-		sb = heroB.toString();
+		//test EvolutionFOR/DEXINT/CON
+		System.out.println("Test de EvolutionFOR/DEXINT/CON() \n");
 		
-		int resultat = heroA.max(FOR, DEX) + 15;
+		boolean aG= heroG.evolutionFOR();
+		boolean bG= heroG.evolutionDEX();
+		boolean cG= heroG.evolutionINT();
+		boolean dG= heroG.evolutionCON();
+		
+		boolean aM= heroM.evolutionFOR();
+		boolean bM= heroM.evolutionDEX();
+		boolean cM= heroM.evolutionINT();
+		boolean dM= heroM.evolutionCON();
+		
+		boolean aC= heroC.evolutionFOR();
+		boolean bC= heroC.evolutionDEX();
+		boolean cC= heroC.evolutionINT();
+		boolean dC= heroC.evolutionCON();
+		
+		System.out.println("\nGuerrier");
+		System.out.println(aG);
+		System.out.println(bG);
+		System.out.println(cG);
+		System.out.println(dG);
 		
 		
+		System.out.println("\nMagicien");
+		System.out.println(aM);
+		System.out.println(bM);
+		System.out.println(cM);
+		System.out.println(dM);
 		
-		System.out.println(sa);
-		System.out.println(sb);
+		System.out.println("\nChasseur");
+		System.out.println(aC);
+		System.out.println(bC);
+		System.out.println(cC);
+		System.out.println(dC);
+		System.out.println("\n");
 		
+		
+		//RESTE EVOLUTION XP CHASSEUR
+		System.out.println("Test de evolutionXP()");
+		System.out.println("\nGuerrier");
+		//EVOLUTION GUERRIER
+		System.out.println(testG);
+		System.out.println("\n");
+		heroG.evolutionXP();
+		System.out.println("\n");
+		testG = heroG.toString();
+		System.out.println(testG);
+		
+		//EVOLUTION MAGE
+		System.out.println("Magicien\n");
+		System.out.println(testM);
+		System.out.println("\n");
+		heroM.evolutionXP();
+		System.out.println("\n");
+		testM = heroM.toString();
+		System.out.println(testM);
 	}
 
 }

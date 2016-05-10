@@ -1,32 +1,63 @@
 package fr.ring.personnage;
 
+import java.util.Scanner;
+
 public class Guerrier extends Personnage {
 	/*
 	 * Caracteristique:
 	 * 			FORCE 	=> 	DEX + 10
-	 * 			DEX 	=>	INT + 10
-	 * 			INT		=>	CON + 10
+	 * 			DEX		=>	INT
+	 * 			INT		=>	CON
 	 * 
-	 * 		Donc pour 80 points de competences à gagner.
+	 * 			30-20-20-10
 	 */
-	public Guerrier() {
-			super("Farida",  35, 25, 15, 5);
-		}
 	
+	
+	// COnstructeur a choisir lequel est le  mieux
+	
+	//par defaut en respectant le minimum de condition
+	public Guerrier() {
+			super("Farida",30 , 20, 20, 10);
+	}
+	
+	//champs par champs
 	public Guerrier(String nom, int FOR, int DEX, int INT, int CON){
 		super(nom, FOR, DEX, INT, CON);
 	}
 
+	//Methode toString
 	public String toString() {
-		return "Classe du heros: Guerrier \n Nom: " + getNom() + ", Force: " + getFOR() + ", Dexeterites" + getDEX() + ", Intelligence: "
+		return "Classe du heros: Guerrier Nom: " + getNom() + ", Force: " + getFOR() + ", Dexeterite: " + getDEX() + ", Intelligence: "
 				+ getINT() + ", Concentration: " + getCON() + ", PV: " + getVIT() + ", Experience: " + getEXP();
 	}
 	
-// ATTRIBUTION DES POINTS DE COMPETENCES
-	public Evolution(){
-		if (getEXP() = 20){
-			break;
-		
-		}
+// METHODE ATTRIBUTION DES POINTS DE COMPETENCES
+	
+	public boolean evolutionFOR(){
+		// Force peut être augmenter tout le temps car 0 constriction
+		return true;
 	}
+	
+	public boolean evolutionDEX(){
+		if (getFOR() > getDEX() + 10)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean evolutionINT(){
+		if (getFOR() > getINT()+10 && getDEX()>getINT())
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean evolutionCON(){
+		if (getFOR() > getCON() + 10 && getINT()>getCON())
+			return true;
+		else
+			return false;
+	}
+	
+	
 }

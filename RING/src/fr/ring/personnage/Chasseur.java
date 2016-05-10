@@ -1,4 +1,5 @@
 package fr.ring.personnage;
+
 public class Chasseur extends Personnage {
 	/*
 	 * Caracteristique:
@@ -19,6 +20,26 @@ public class Chasseur extends Personnage {
 	public String toString() {
 		return "Classe du heros: Chasseur \n Nom: " + getNom() + ", Force: " + getFOR() + ", Dexeterites" + getDEX() + ", Intelligence: "
 				+ getINT() + ", Concentration: " + getCON() + ", PV: " + getVIT() + ", Experience: " + getEXP();
+	}
+
+	@Override
+	public boolean evolutionFOR() {
+		return true;
+	}
+
+	@Override
+	public boolean evolutionDEX() {
+		return true;
+	}
+
+	@Override
+	public boolean evolutionINT() {
+		return true;
+	}
+
+	@Override
+	public boolean evolutionCON() {
+		return true;
 	}
 
 }
