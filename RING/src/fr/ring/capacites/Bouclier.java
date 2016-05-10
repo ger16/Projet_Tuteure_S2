@@ -29,7 +29,7 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 
 	@Override
 	public boolean attaquer(Personnage attaquant) {
-		PBA = attaquant.getDEX() * MAN / 5000;
+		PBA = attaquant.getDEX() * MAN / 5000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -39,8 +39,8 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 	@Override
 	public double efficaciteAttaque(Personnage attaquant) {
 		Random rand = new Random();
-		EFF = attaquant.getFOR() * PRO / 50;
-		double effRand = EFF * 25 / 100;
+		EFF = attaquant.getFOR() * PRO / 50.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 
@@ -50,7 +50,7 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 
 	@Override
 	public boolean seDefendre(Personnage defenseur) {
-		PBA = defenseur.getDEX() * MAN / 10000;
+		PBA = defenseur.getDEX() * MAN / 10000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -60,8 +60,8 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 	@Override
 	public double efficaciteDefense(Personnage defenseur) {
 		Random rand = new Random();
-		EFF = defenseur.getFOR() * PRO / 100;
-		double effRand = EFF * 25 / 100;
+		EFF = defenseur.getFOR() * PRO / 100.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 

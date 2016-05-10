@@ -30,7 +30,7 @@ public class SortAttaque extends Capacite implements Attaque {
 
 	@Override
 	public boolean attaquer(Personnage attaquant) {
-		PBA = attaquant.getINT() * FAC / 10000;
+		PBA = attaquant.getINT() * FAC / 10000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -40,8 +40,8 @@ public class SortAttaque extends Capacite implements Attaque {
 	@Override
 	public double efficaciteAttaque(Personnage attaquant) {
 		Random rand = new Random();
-		EFF = attaquant.getCON() * PUI / 100;
-		double effRand = EFF * 25 / 100;
+		EFF = attaquant.getCON() * PUI / 100.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 

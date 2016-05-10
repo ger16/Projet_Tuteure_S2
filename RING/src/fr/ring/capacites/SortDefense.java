@@ -29,7 +29,7 @@ public class SortDefense extends Capacite implements Defense {
 
 	@Override
 	public boolean seDefendre(Personnage defenseur) {
-		PBA = defenseur.getINT() * FAC / 10000;
+		PBA = defenseur.getINT() * FAC / 10000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -39,8 +39,8 @@ public class SortDefense extends Capacite implements Defense {
 	@Override
 	public double efficaciteDefense(Personnage defenseur) {
 		Random rand = new Random();
-		EFF = defenseur.getCON() * PUI / 100;
-		double effRand = EFF * 25 / 100;
+		EFF = defenseur.getCON() * PUI / 100.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 
