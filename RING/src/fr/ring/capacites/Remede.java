@@ -29,7 +29,7 @@ public class Remede extends Capacite implements Soin {
 
 	@Override
 	public boolean seSoigner(Personnage soigneur) {
-		PBA = soigneur.getDEX() * FAC / 10000;
+		PBA = soigneur.getDEX() * FAC / 10000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -39,8 +39,8 @@ public class Remede extends Capacite implements Soin {
 	@Override
 	public double efficaciteSoin(Personnage soigneur) {
 		Random rand = new Random();
-		EFF = soigneur.getFOR() * PUI / 100;
-		double effRand = EFF * 25 / 100;
+		EFF = soigneur.getFOR() * PUI / 100.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 

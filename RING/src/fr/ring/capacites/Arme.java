@@ -29,28 +29,32 @@ public class Arme extends Capacite implements Attaque, Defense{
 
 	@Override
 	public boolean attaquer(Personnage attaquant) {
-		PBA = attaquant.getDEX() * MAN / 10000;
+		PBA = attaquant.getDEX() * MAN / 10000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
+		
 		return false;
 	}
 
 	@Override
 	public double efficaciteAttaque(Personnage attaquant) {
 		Random rand = new Random();
-		EFF = attaquant.getFOR() * IMP / 100;
-		double effRand = EFF * 25 / 100;
+		EFF = attaquant.getFOR() * IMP / 100.0;
+		System.out.println(EFF);
+		double effRand = EFF * 25 / 100.0;
+		System.out.println(effRand);
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
-		else 
+		else
 			EFF += Math.random() * effRand;
+		
 		return EFF;
 	}
 
 	@Override
 	public boolean seDefendre(Personnage defenseur) {
-		PBA = defenseur.getDEX() * MAN / 5000;
+		PBA = defenseur.getDEX() * MAN / 5000.0;
 		double random = Math.random();
 		if(random <= PBA)
 			return true;
@@ -60,8 +64,8 @@ public class Arme extends Capacite implements Attaque, Defense{
 	@Override
 	public double efficaciteDefense(Personnage defenseur) {
 		Random rand = new Random();
-		EFF = defenseur.getFOR() * IMP / 50;
-		double effRand = EFF * 25 / 100;
+		EFF = defenseur.getFOR() * IMP / 50.0;
+		double effRand = EFF * 25 / 100.0;
 		if(rand.nextInt(2) == 0)
 			EFF -= Math.random() * effRand;
 		else 
