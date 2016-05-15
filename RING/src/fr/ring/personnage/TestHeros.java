@@ -1,13 +1,15 @@
 package fr.ring.personnage;
 import java.util.*;
 
+import fr.ring.capacites.Capacite;
+
 public class TestHeros{
 
 	public static void main(String[] args) {
 		
-		Guerrier heroG = new Guerrier ("GerryBoy", 50, 40, 29, 18);
-		Magicien heroM = new Magicien ("Jaina", 10, 15, 35, 30);
-		Chasseur heroC = new Chasseur ("Huntard", 20, 20, 20, 20);
+		Guerrier heroG = new Guerrier ("GerryBoy", 50, 40, 29, 18, new ArrayList<Capacite>());
+		Mage heroM = new Mage ("Jaina", 10, 15, 35, 30, new ArrayList<Capacite>());
+		Chasseur heroC = new Chasseur ("Huntard", 20, 20, 20, 20, new ArrayList<Capacite>());
 	
 		// test du toString
 		System.out.println("Test du toString\n");

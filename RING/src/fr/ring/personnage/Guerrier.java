@@ -1,6 +1,9 @@
 package fr.ring.personnage;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import fr.ring.capacites.Capacite;
 
 public class Guerrier extends Personnage {
 	/*
@@ -17,12 +20,13 @@ public class Guerrier extends Personnage {
 	
 	//par defaut en respectant le minimum de condition
 	public Guerrier() {
-			super("Farida",30 , 20, 20, 10);
+			super("Farida",30 , 20, 20, 10, new ArrayList<Capacite>());
 	}
 	
 	//champs par champs
-	public Guerrier(String nom, int FOR, int DEX, int INT, int CON){
-		super(nom, FOR, DEX, INT, CON);
+	public Guerrier(String nom, int FOR, int DEX, int INT, int CON, ArrayList<Capacite> CAP){
+		super(nom, FOR, DEX, INT, CON, CAP);
+		
 	}
 
 	//Methode toString
@@ -34,7 +38,7 @@ public class Guerrier extends Personnage {
 // METHODE ATTRIBUTION DES POINTS DE COMPETENCES
 	
 	public boolean evolutionFOR(){
-		// Force peut être augmenter tout le temps car 0 constriction
+		// Force peut ï¿½tre augmenter tout le temps car 0 constriction
 		return true;
 	}
 	

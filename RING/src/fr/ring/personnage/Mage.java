@@ -1,24 +1,29 @@
 package fr.ring.personnage;
 
-public class Magicien extends Personnage {
+import java.util.ArrayList;
+
+import fr.ring.capacites.Capacite;
+
+public class Mage extends Personnage {
 /*
  * Caracteristique:
  * INT >= max(FOR, DEX) + 15
  * CON >= max(FOR, DEX) + 15
  * 
  * Valeur la plus grande entre FOR et DEX est selectionner.
- * 80 points de competences à repartir par default:
+ * 80 points de competences ï¿½ repartir par default:
  * INT: 30
  * CON: 30
  * FOR: 10
  * DEX: 10
  */
-	public Magicien() {
-		super("Farida",  10, 10, 30, 30);
+	public Mage() {
+		super("Farida",  10, 10, 30, 30, new ArrayList<Capacite>());
 	}
 
-	public Magicien(String nom, int FOR, int DEX, int INT, int CON){
-	super(nom, FOR, DEX, INT, CON);
+	public Mage(String nom, int FOR, int DEX, int INT, int CON, ArrayList<Capacite> CAP){
+		super(nom, FOR, DEX, INT, CON, CAP);
+		
 	}
 
 	public String toString() {

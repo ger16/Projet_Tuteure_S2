@@ -1,5 +1,9 @@
 package fr.ring.personnage;
 
+import java.util.ArrayList;
+
+import fr.ring.capacites.Capacite;
+
 public class Chasseur extends Personnage {
 	/*
 	 * Caracteristique:
@@ -8,11 +12,11 @@ public class Chasseur extends Personnage {
 	 * 			INT		>= 20
 	 */
 	public Chasseur() {
-		super("Farida",  20, 20, 20, 20);
+		super("Farida",  20, 20, 20, 20, new ArrayList<Capacite>());
 	}
 	
-	public Chasseur(String nom, int FOR, int DEX, int INT, int CON){
-		super(nom, FOR, DEX, INT, CON);
+	public Chasseur(String nom, int FOR, int DEX, int INT, int CON, ArrayList<Capacite> CAP){
+		super(nom, FOR, DEX, INT, CON, CAP);
 		
 	}
 	

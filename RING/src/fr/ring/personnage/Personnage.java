@@ -1,6 +1,9 @@
 package fr.ring.personnage;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import fr.ring.capacites.Capacite;
 
 public abstract class Personnage {
 	
@@ -13,6 +16,7 @@ public abstract class Personnage {
 	
 	private int VIT; 	// Vitalite
 	private int EXP;	// Experience
+	private ArrayList<Capacite> CAP;
 	
 	public Personnage() {
 	/*	nom = "Farida";
@@ -25,7 +29,7 @@ public abstract class Personnage {
 		*/
 	}
 
-	public Personnage(String nom, int fOR, int dEX, int iNT, int cON) {
+	public Personnage(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP) {
 		this.nom = nom;
 		FOR = fOR;
 		DEX = dEX;
@@ -33,16 +37,18 @@ public abstract class Personnage {
 		CON = cON;
 		VIT = 200 -(FOR + DEX + INT + CON) + EXP*3;
 		EXP = 1;
+		CAP = cAP;
 	}
 	
 	public Personnage( Personnage hero){
-		this.nom = hero.nom;
-		this.FOR= hero.FOR;
-		this.DEX= hero.DEX;
-		this.INT= hero.INT;
-		this.CON= hero.CON;
-		this.VIT= 200 -(hero.FOR + hero.DEX + hero.INT + hero.CON) + EXP*3;
-		this.EXP= hero.EXP;
+		this.nom = hero.getNom();
+		this.FOR = hero.getFOR();
+		this.DEX = hero.getDEX();
+		this.INT = hero.getINT();
+		this.CON = hero.getCON();
+		this.VIT = getVIT();
+		this.EXP = hero.getEXP();
+		this.CAP = hero.getCAP();
 	}
 
 	// GETTERS SETTERS
@@ -94,6 +100,13 @@ public abstract class Personnage {
 	}
 	public void setEXP(int eXP) {
 		EXP = eXP;
+	}
+	public ArrayList<Capacite> getCAP() {
+		return CAP;
+	}
+
+	public void setCAP(ArrayList<Capacite> cAP) {
+		CAP = cAP;
 	}
 	
 	// METHODE EVOLUTION DES PERSONNAGES
