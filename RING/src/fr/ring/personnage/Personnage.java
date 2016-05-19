@@ -168,6 +168,16 @@ public abstract class Personnage {
 	public abstract boolean evolutionINT();
 	public abstract boolean evolutionCON();
 	
+	public void capituler(){
+		
+	}
+	
+	public boolean decede(){
+		if(this.VIT <= 0)
+			return true;
+		return false;
+	}
+	
 	public  void evolutionPossible(){
 		if (evolutionFOR()==true)
 			System.out.println("1-Force peut etre augmenter");
