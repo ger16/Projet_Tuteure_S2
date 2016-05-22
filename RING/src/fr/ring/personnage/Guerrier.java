@@ -1,6 +1,5 @@
 package fr.ring.personnage;
 
-import java.util.Scanner;
 
 public class Guerrier extends Personnage {
 	/*
@@ -16,8 +15,11 @@ public class Guerrier extends Personnage {
 	// COnstructeur a choisir lequel est le  mieux
 	
 	//par defaut en respectant le minimum de condition
-	public Guerrier() {
-			super("Farida",30 , 20, 20, 10);
+	public Guerrier(String nom) {
+			super(nom,30 , 20, 20, 10);
+	}
+	public Guerrier(Guerrier hero){
+		super(hero);
 	}
 	
 	//champs par champs

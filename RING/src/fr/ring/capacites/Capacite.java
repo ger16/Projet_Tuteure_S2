@@ -18,7 +18,7 @@ public abstract class Capacite {
 		PBA = pBA;
 		EFF = eFF;
 	}
-	
+
 	public Capacite(Capacite c){
 		this.nom = c.getNom();
 		this.PBA = c.PBA;

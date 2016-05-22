@@ -14,15 +14,14 @@ public abstract class Personnage {
 	private int VIT; 	// Vitalite
 	private int EXP;	// Experience
 	
-	public Personnage() {
-	/*	nom = "Farida";
+	public Personnage(String nom) {
+		this.nom =nom;
 		FOR = 0;
 		DEX = 0;
 		INT = 0;
 		CON = 0;
 		VIT = 200 -(FOR + DEX + INT + CON) + EXP*3;
 		EXP = 1;
-		*/
 	}
 
 	public Personnage(String nom, int fOR, int dEX, int iNT, int cON) {
@@ -35,7 +34,7 @@ public abstract class Personnage {
 		EXP = 1;
 	}
 	
-	public Personnage( Personnage hero){
+	public Personnage(Personnage hero){
 		this.nom = hero.nom;
 		this.FOR= hero.FOR;
 		this.DEX= hero.DEX;

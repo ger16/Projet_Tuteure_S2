@@ -13,12 +13,16 @@ public class Magicien extends Personnage {
  * FOR: 10
  * DEX: 10
  */
-	public Magicien() {
-		super("Farida",  10, 10, 30, 30);
+	public Magicien(String nom) {
+		super(nom,  10, 10, 30, 30);
 	}
 
 	public Magicien(String nom, int FOR, int DEX, int INT, int CON){
 	super(nom, FOR, DEX, INT, CON);
+	}
+	
+	public Magicien(Magicien hero){
+		super(hero);
 	}
 
 	public String toString() {

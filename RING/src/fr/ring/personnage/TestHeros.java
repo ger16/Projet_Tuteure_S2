@@ -79,6 +79,15 @@ public class TestHeros{
 		System.out.println("\n");
 		testM = heroM.toString();
 		System.out.println(testM);
+		
+		//EVOLUTION CHASSEUR 
+		
+		System.out.println(testC);
+		System.out.println("\n");
+		heroC.evolutionXP();
+		System.out.println("\n");
+		testC = heroC.toString();
+		System.out.println(testC);
 	}
 
 }

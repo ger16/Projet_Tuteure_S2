@@ -7,13 +7,16 @@ public class Chasseur extends Personnage {
 	 * 			DEX 	>= 20
 	 * 			INT		>= 20
 	 */
-	public Chasseur() {
-		super("Farida",  20, 20, 20, 20);
+	public Chasseur(String nom) {
+		super(nom,  20, 20, 20, 20);
 	}
+	
 	
 	public Chasseur(String nom, int FOR, int DEX, int INT, int CON){
 		super(nom, FOR, DEX, INT, CON);
-		
+	}
+	public Chasseur(Chasseur hero){
+		super(hero);
 	}
 	
 	
