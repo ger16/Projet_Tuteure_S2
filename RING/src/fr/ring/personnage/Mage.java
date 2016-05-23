@@ -2,6 +2,10 @@ package fr.ring.personnage;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+
 import fr.ring.capacites.Capacite;
 
 public class Mage extends Personnage {
@@ -61,5 +65,27 @@ public class Mage extends Personnage {
 	public boolean evolutionCON() {	
 			return true;
 			//Pas de contrainte
+	}
+	
+	public void initWalkCycle() throws SlickException {
+		spriteSheet = new SpriteSheet[6];
+	
+		spriteSheet[0] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/HEAD_robe_hood.png", 64, 64);
+		spriteSheet[1] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/BELT_rope.png", 64, 64);
+		spriteSheet[2] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/TORSO_robe_shirt_brown.png", 64, 64);
+		spriteSheet[3] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/LEGS_robe_skirt.png", 64, 64);
+		spriteSheet[4] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/FEET_shoes_brown.png", 64, 64);
+		spriteSheet[5] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/BODY_male.png", 64, 64);
+		this.initSpriteSheet();
+	}
+	
+	public void renderWalkCycle (Graphics g) throws SlickException{
+	    g.drawAnimation(this.getUneAnimationCorps(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+	    g.drawAnimation(this.getUneAnimationPieds(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+	    g.drawAnimation(this.getUneAnimationJambes(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+	    g.drawAnimation(this.getUneAnimationTorse(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+	    g.drawAnimation(this.getUneAnimationCeinture(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+		g.drawAnimation(this.getUneAnimationTete(this.getDirection() + (this.isMoving() ? 4 : 0)), this.getX()-32, this.getY()-60);
+		    
 	}
 }

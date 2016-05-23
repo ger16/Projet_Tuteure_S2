@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" nextobjectid="25">
  <tileset firstgid="1" name="barricade_tiles" tilewidth="32" tileheight="32" tilecount="192" columns="16">
   <image source="barricade_tiles.png" width="512" height="384"/>
  </tileset>
@@ -27,6 +27,9 @@
  <tileset firstgid="1407" name="base_out_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="base_out_atlas.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="2431" name="collision" tilewidth="32" tileheight="32" tilecount="25" columns="5">
+  <image source="collision.png" width="160" height="160"/>
+ </tileset>
  <layer name="Calque 7" width="80" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3XuQ0AIQwAQYjohXbov5cLQUQ8AeKYkZxbKycOAQAAYFyJddjTtszp9DZ3cot79AMAgDe1/6ifYE7fTr81+gHwNx8N9tASgCUAAA==
@@ -37,7 +40,7 @@
    H4sIAAAAAAAAA+WZTUvDQBCG0zYQelTBCir06kkFFdQ/4M2Dv6QX/3PvFqTgxwSydDvMTGayX6kWXpKmm2Tm2XdmjVlNqmoVqAVo2W3dvq8FMSZU1PVLKJSdz0/KKUa++B6a61Gxjp1fbL/gc7XXaWObNztpGFo5x+KHc3Xf1xXNwH2OYP8YdOId6/ObxO6NEMWQyyE3v1fQB+S8QXlLHvI/p93vZ0p+WmaUuPxfmp1y8cOxbSv+HlL+56AL0OVknx3lZXy+llsfx9z8rHPM1S72G+ZnqdGhDOfNPj+/1mPzC5ljiR/FMhU3qTf63GLyizHPXD/TrKUpuEkMY/GLGSPnxRjrQqiump04P1r4pYxV6o2OYy5ufSyt/nvPGGepWtVI04tzrHFajqV5peDnaqt0LrkVwgofa5+9/gvDGF7j1sG/zFFiYf1fRx/DdvtZlc95bNykvyewvoDfN+jnQD2ZipuGJ+VJ58vSXMbKTVPbvkpzKs1NU8Pcs6vz4noEPTKUWwy+1HOqde4OhdvQ/Cw+1Ho0NsNr0A3o1sBNw4Iak6KuuXto5spfY4ayvAPdgx4EbtqY+sZY2bXvLlJq4/VEt7XyewQ9gZ4Zv1lrU9OvtJqC6gDN0L6v9ti2kuOP0d/6+olFmlrE/Gbddup9r9ExfByf47O08LNw1DCz9mcrOzwOM6G8hTlqGDuG7r0clZ+GYWq/LSd8PJq6xtwojjX6HY+hWPr+o+LQznsIE4uXhl6P44f7GMVX8q4Tfi8s1Q+Xj6VuLeda1glOvwRBVZqAJQAA
   </data>
  </layer>
- <layer name="Calque 8" width="80" height="30">
+ <layer name="Background" width="80" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3VSwrCMBSF4eugta5CxQftKny7g459O3cLiu7MpbgPT6AlQZLaOBGa88FPIdVBDxVFmunSsufz2aqazvWc3Vikh/roGenMc/W9Aa5DNELjOMz9bCbYYopm6BXpzPM5WqAlWqF1gPu5bLDFFu1QZGSe79EBHdEJnQPfL22LZKhjyeaKvW4ox/07ro/A9yu5dnRR++XFfe6nJTW2K3E/u6x4F6vw/fsurfEOKtzvd+p3zv38fP7HcD8/CfcjIiIiIiIiIiIioj96A2PqgCCAJQAA
   </data>
@@ -62,9 +65,40 @@
    H4sIAAAAAAAAA+2WTQ6CQAyFywq2aiLgzzlE74ALN+pFPLu6skQJdZzJBJhIoO9LXkiYhExfXluIAACgG7OIaM5aREPf5H+UXOvxo74s+RspK1Pk3ylgrWv+1oa1VeBfGShz2oBv3YBv7Qm5GzQScjdo4BY1AgAAAEB/7jHRg/WMh77JOMkSopy1Soa+yTio85ayMlbO2rN3B/j3g60367zt+F1ReYe+dSJ708zbmZ8X1jXGDHRRJE1vyrxJLyswA9/IHD0Nn2TezN6VPmvC7DszR64ZJ73UjK/vTJ8w575p23cuv7X46qrT3Acmvn89LfvDVadtzkmvbefS0ynuD1vWZJ3y3LYPpNe286n/P/t6ynfuy1SbHfwCYLsakoAlAAA=
   </data>
  </layer>
- <layer name="Décor" width="80" height="30">
+ <layer name="Décor" width="80" height="30" opacity="0.97">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+2X623CMBhFKX8yAq8yR4BS1uDVdg0CFNZomAQ6SdttelBUCaG4dkBgTO6Rjiz5T+Krm89QqQhxGdpV329w+9TJqIFNbOHjQWbPgeSXPvh5bkw+HexiD5+wX81yGwSS3Z6dp/yGZDTCMU5wii/4im8B5eeLGRklOMcFLvEdV7hWfkIIIYQQQhSiFvH/GBuR7zcJk5jcOthVfk4c923IOsKx8nNCfXMnb7bl9U0zMB/XrqmTGafONs3ADPWoGLpLz+O4bzPWBOeG/Ez3RFnuD1vfPlhT3BhyMH3fZfnubefcsr/Dz8j9t8t/+yFT5Px/fLH/jT9ReTplwnZ+28y6x04VwXb+svfrXK7Zr19QAJx4gCUAAA==
   </data>
  </layer>
+ <layer name="Collisions" width="80" height="30" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2YWwrDMAwE89tT9+olFEMxJAjrsSOnA/4KiVZr+REdh4/36zvunlejiLnK3z8fNP+Gnt9BhuLflQ66h2r/LP50qMe7+a+MZ3mH6uHJrC9aa0T+dA9PotdMdM7RtZg1J16d2bVCnV/v9yvXmGetVJ9NlvNauTd546vua2rfZh1eD9X3XiVd9kQa2WforlD2/m6o8unuI0U/RYcVql6qrgFd34Cmk6bHilq3On4U1Xns4tsMrTfRhflfMquHp2Tuv2SMq5hezU8gslf1JN8GlnzpPUElK/WVtV92ZCX/yn44nd09+AC2qkAMgCUAAA==
+  </data>
+ </layer>
+ <objectgroup name="Trigger" width="1" height="1" visible="0">
+  <object id="20" name="p1" type="teleport" x="650" y="396" width="45" height="33">
+   <properties>
+    <property name="dest-x" type="float" value="300"/>
+    <property name="dest-y" type="float" value="300"/>
+   </properties>
+  </object>
+  <object id="22" name="p2" type="teleport" x="1033" y="554" width="46" height="30">
+   <properties>
+    <property name="dest-x" type="float" value="300"/>
+    <property name="dest-y" type="float" value="300"/>
+   </properties>
+  </object>
+  <object id="23" name="p3" type="teleport" x="1515" y="395" width="46" height="34">
+   <properties>
+    <property name="dest-x" type="float" value="300"/>
+    <property name="dest-y" type="float" value="300"/>
+   </properties>
+  </object>
+  <object id="24" name="p4" type="teleport" x="1896" y="204" width="50" height="32">
+   <properties>
+    <property name="dest-x" type="float" value="300"/>
+    <property name="dest-y" type="float" value="300"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
