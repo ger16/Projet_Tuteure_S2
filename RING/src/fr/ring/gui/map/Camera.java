@@ -1,7 +1,8 @@
-package fr.ring.gui;
+package fr.ring.gui.map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
 
 public class Camera {
 	private Player player;

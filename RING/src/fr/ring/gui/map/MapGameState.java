@@ -1,8 +1,9 @@
-package fr.ring.gui;
+package fr.ring.gui.map;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
 import fr.ring.personnage.*;
 
 public class MapGameState extends BasicGameState{

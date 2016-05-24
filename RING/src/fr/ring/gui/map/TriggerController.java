@@ -1,7 +1,9 @@
-package fr.ring.gui;
+package fr.ring.gui.map;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import fr.ring.gui.battle.BattleGameState;
 
 public class TriggerController {
 	

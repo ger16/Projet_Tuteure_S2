@@ -1,4 +1,4 @@
-package fr.ring.gui;
+package fr.ring.gui.map;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;

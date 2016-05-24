@@ -5,6 +5,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.battle.BattleGameState;
+import fr.ring.gui.map.MapGameState;
+
 public class StateGame extends StateBasedGame {
 	
 	public StateGame(String name) {
@@ -22,7 +25,7 @@ public class StateGame extends StateBasedGame {
 	}
 	
 	public static void main(String[] args) throws SlickException{
-		new AppGameContainer(new StateGame("Ring"), 1920, 1080, false).start();
+		new AppGameContainer(new StateGame("Ring"), 1000, 800, false).start();
 	}
 
 }

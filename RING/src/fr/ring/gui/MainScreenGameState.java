@@ -11,6 +11,8 @@ import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.map.MapGameState;
+
 public class MainScreenGameState extends BasicGameState {
 	
 	public static  final int ID = 0 , SPACE = 50, Y_PADDING = 3, X_PADDING = 13, JOUER = 0, CREER_PERSONNAGE = 1, QUITTER = 2;

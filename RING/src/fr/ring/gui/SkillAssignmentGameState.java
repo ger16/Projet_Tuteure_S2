@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.ring.gui.CreateCharacterGameState.ButtonListener;
+import fr.ring.gui.map.MapGameState;
 
 public class SkillAssignmentGameState extends BasicGameState {
 

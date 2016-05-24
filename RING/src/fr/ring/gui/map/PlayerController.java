@@ -1,8 +1,10 @@
-package fr.ring.gui;
+package fr.ring.gui.map;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.state.StateBasedGame;
+
+import fr.ring.gui.MainScreenGameState;
 
 public class PlayerController implements KeyListener {
 	

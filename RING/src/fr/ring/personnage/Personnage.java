@@ -7,6 +7,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.SpriteSheet;
 
 import fr.ring.capacites.Capacite;
+import fr.ring.capacites.Epee;
+import fr.ring.capacites.ToucheGuerrisseur;
 
 public abstract class Personnage {
 	public static final int TETE = 0, CEINTURE = 1, TORSE = 2, JAMBES = 3, PIEDS = 4 ,CORPS = 5;
@@ -22,7 +24,7 @@ public abstract class Personnage {
 	private int EXP;	// Experience
 	private ArrayList<Capacite> CAP;
 	
-	private float x = 300, y = 300;
+	protected float x = 300, y = 300;
 	private int direction = 0;
 	private boolean moving = false;
 	protected SpriteSheet [] spriteSheet;
@@ -53,6 +55,8 @@ public abstract class Personnage {
 		VIT = 200 -(FOR + DEX + INT + CON) + EXP*3;
 		EXP = 1;
 		CAP = cAP;
+		cAP.add(new Epee());
+		cAP.add(new ToucheGuerrisseur());
 	}
 	
 	public Personnage( Personnage hero){
@@ -296,6 +300,14 @@ public abstract class Personnage {
 			this.animationsPieds[i] = a;
 		else if(nomAnimation == CORPS)
 			this.animationsCorps[i] = a;
+	}
+
+	public SpriteSheet[] getSpriteSheet() {
+		return spriteSheet;
+	}
+
+	public void setSpriteSheet(SpriteSheet[] spriteSheet) {
+		this.spriteSheet = spriteSheet;
 	}
 	
 }

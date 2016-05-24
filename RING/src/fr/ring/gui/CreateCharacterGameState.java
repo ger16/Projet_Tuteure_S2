@@ -11,6 +11,7 @@ import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.map.MapGameState;
 import fr.ring.personnage.Chasseur;
 import fr.ring.personnage.Guerrier;
 import fr.ring.personnage.Mage;
