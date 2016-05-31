@@ -48,6 +48,18 @@ public class SortAttaque extends Capacite implements Attaque {
 			EFF += Math.random() * effRand;
 		return EFF;
 	}
+	
+	@Override
+	public boolean seDefendre(Personnage defenseur) {return false;}
+
+	@Override
+	public double efficaciteDefense(Personnage defenseur) {return 0;}
+
+	@Override
+	public boolean seSoigner(Personnage soigneur) {return false;}
+
+	@Override
+	public double efficaciteSoin(Personnage soigneur) {return 0;}
 
 	public int getPUI() {
 		return PUI;
@@ -70,4 +82,5 @@ public class SortAttaque extends Capacite implements Attaque {
 		return "SortAttaque [PUI=" + PUI + ", FAC=" + FAC + ", nom=" + nom
 				+ ", PBA=" + PBA + ", EFF=" + EFF + "]";
 	}
+
 }

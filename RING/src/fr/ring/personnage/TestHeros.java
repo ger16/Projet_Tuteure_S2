@@ -68,7 +68,7 @@ public class TestHeros{
 		//EVOLUTION GUERRIER
 		System.out.println(testG);
 		System.out.println("\n");
-		heroG.evolutionXP();
+		//heroG.evolutionXP();
 		System.out.println("\n");
 		testG = heroG.toString();
 		System.out.println(testG);
@@ -77,7 +77,7 @@ public class TestHeros{
 		System.out.println("Magicien\n");
 		System.out.println(testM);
 		System.out.println("\n");
-		heroM.evolutionXP();
+		//heroM.evolutionXP();
 		System.out.println("\n");
 		testM = heroM.toString();
 		System.out.println(testM);

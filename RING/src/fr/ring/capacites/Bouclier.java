@@ -68,6 +68,12 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 			EFF += Math.random() * effRand;
 		return EFF;
 	}
+	
+	@Override
+	public boolean seSoigner(Personnage soigneur) {return false;}
+
+	@Override
+	public double efficaciteSoin(Personnage soigneur) {return 0;}
 
 	public int getPRO() {
 		return PRO;
@@ -90,4 +96,5 @@ public class Bouclier extends Capacite implements Defense, Attaque {
 		return "Bouclier [PRO=" + PRO + ", MAN=" + MAN + ", nom=" + nom
 				+ ", PBA=" + PBA + ", EFF=" + EFF + "]";
 	}
+
 }

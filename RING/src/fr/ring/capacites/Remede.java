@@ -47,6 +47,18 @@ public class Remede extends Capacite implements Soin {
 			EFF += Math.random() * effRand;
 		return EFF;
 	}
+	
+	@Override
+	public boolean attaquer(Personnage attaquant) {return false;}
+
+	@Override
+	public double efficaciteAttaque(Personnage attaquant) {return 0;}
+
+	@Override
+	public boolean seDefendre(Personnage defenseur) {return false;}
+
+	@Override
+	public double efficaciteDefense(Personnage defenseur) {return 0;}
 
 	public int getPUI() {
 		return PUI;
@@ -69,7 +81,4 @@ public class Remede extends Capacite implements Soin {
 		return "Remede [PUI=" + PUI + ", FAC=" + FAC + ", nom=" + nom
 				+ ", PBA=" + PBA + ", EFF=" + EFF + "]";
 	}
-
-
-
 }

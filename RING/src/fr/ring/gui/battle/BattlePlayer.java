@@ -29,7 +29,7 @@ public class BattlePlayer {
 			hero[i].drawCentered(container.getWidth() * 1 / 4, container.getHeight() / 2);
 		}
 		Font font = g.getFont();
-		String pv = Integer.toString(p.getVIT());
+		String pv = Integer.toString((int)p.getVIT());
 	    font.drawString(container.getWidth() * 1 / 4 - font.getWidth(pv) / 2, container.getHeight() / 2 - hero[0].getHeight() / 2 - font.getLineHeight(), pv, Color.white);
 	
 	}

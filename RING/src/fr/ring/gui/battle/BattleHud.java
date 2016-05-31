@@ -13,8 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import shionn.slick.ui.TextArea;
 import shionn.slick.ui.align.VerticalAlignement;
 
-import fr.ring.gui.MainScreenGameState;
-import fr.ring.gui.battle.BattleGameState.BattleCommand;
+import fr.ring.gui.battle.BattleController.BattleCommand;
 
 public class BattleHud {
 	
@@ -40,10 +39,10 @@ public class BattleHud {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException{
 		this.game = game;
 		Image buttonImage = new Image("fr/ring/gui/ressources/hud/hud_button.png");
-		attackButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 5);
-		defendButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 4);
-		healButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 3);
-		surrenderButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 2);
+		attackButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 5, new ButtonListener(ATTAQUER));
+		defendButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 4, new ButtonListener(DEFENDRE));
+		healButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 3, new ButtonListener(SOIGNER));
+		surrenderButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 2, new ButtonListener(CAPITULER));
 		log = new TextArea(SPACE + attackButton.getWidth() + SPACE, attackButton.getY(), container.getWidth() - attackButton.getWidth() - SPACE * 3, buttonImage.getHeight() * 3 + SPACE * 2);
 		log.setBottomUp(true);
 		log.setDefaultFont(container.getDefaultFont());
@@ -88,5 +87,41 @@ public class BattleHud {
 			}
 		}
 		
+	}
+	
+	public TextArea getLog(){
+		return log;
+	}
+
+	public MouseOverArea getAttackButton() {
+		return attackButton;
+	}
+
+	public void setAttackButton(MouseOverArea attackButton) {
+		this.attackButton = attackButton;
+	}
+
+	public MouseOverArea getDefendButton() {
+		return defendButton;
+	}
+
+	public void setDefendButton(MouseOverArea defendButton) {
+		this.defendButton = defendButton;
+	}
+
+	public MouseOverArea getHealButton() {
+		return healButton;
+	}
+
+	public void setHealButton(MouseOverArea healButton) {
+		this.healButton = healButton;
+	}
+
+	public MouseOverArea getSurrenderButton() {
+		return surrenderButton;
+	}
+
+	public void setSurrenderButton(MouseOverArea surrenderButton) {
+		this.surrenderButton = surrenderButton;
 	}
 }

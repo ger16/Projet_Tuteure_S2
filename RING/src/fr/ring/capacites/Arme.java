@@ -26,7 +26,7 @@ public class Arme extends Capacite implements Attaque, Defense{
 		this.IMP = a.IMP;
 		this.MAN = a.MAN;		
 	}
-
+	
 	@Override
 	public boolean attaquer(Personnage attaquant) {
 		PBA = attaquant.getDEX() * MAN / 10000.0;
@@ -72,6 +72,13 @@ public class Arme extends Capacite implements Attaque, Defense{
 			EFF += Math.random() * effRand;
 		return EFF;
 	}
+	
+	@Override
+	public boolean seSoigner(Personnage soigneur) {return false;}
+
+	@Override
+	public double efficaciteSoin(Personnage soigneur) {return 0;}
+
 
 	public int getIMP() {
 		return IMP;

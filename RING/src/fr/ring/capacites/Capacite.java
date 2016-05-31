@@ -1,6 +1,8 @@
 package fr.ring.capacites;
 
-public abstract class Capacite {
+import fr.ring.personnage.Personnage;
+
+public abstract class Capacite{
 	
 	public static final double PBA_MIN = 0, PBA_MAX = 1;
 	
@@ -25,6 +27,20 @@ public abstract class Capacite {
 		this.EFF = c.EFF;
 	}
 	
+	public abstract boolean attaquer(Personnage attaquant);
+	public abstract double efficaciteAttaque(Personnage attaquant);
+	public abstract boolean seDefendre(Personnage defenseur);
+	public abstract double efficaciteDefense(Personnage defenseur);
+	public abstract boolean seSoigner(Personnage soigneur);
+	public abstract double efficaciteSoin(Personnage soigneur);
+	
+	public boolean containInterfaces(String name){
+		for(int i=0; i < this.getClass().getInterfaces().length; i++){
+			if(this.getClass().getInterfaces()[i].getName().contains(name))
+				return true;
+		}
+		return false;
+	}
 	
 	public double getPBA() {
 		return PBA;

@@ -20,7 +20,7 @@ public abstract class Personnage {
 	private int INT; 	// Intelligence
 	private int CON; 	// Concentration
 	
-	private int VIT; 	// Vitalite
+	private double VIT; 	// Vitalite
 	private int EXP;	// Experience
 	private ArrayList<Capacite> CAP;
 	
@@ -52,7 +52,7 @@ public abstract class Personnage {
 		DEX = dEX;
 		INT = iNT;
 		CON = cON;
-		VIT = 200 -(FOR + DEX + INT + CON) + EXP*3;
+		setVITMax();
 		EXP = 1;
 		CAP = cAP;
 		cAP.add(new Epee());
@@ -107,11 +107,17 @@ public abstract class Personnage {
 		CON = cON;
 	}
 
-	public int getVIT() {
+	public double getVIT() {
 		return VIT;
 	}
-	public void setVIT(int vIT) {
+	public void setVIT(double vIT) {
 		VIT = vIT;
+	}
+	public double getVITMax(){
+		return 200.0 -(FOR + DEX + INT + CON) + EXP*3.0;
+	}
+	public void setVITMax(){
+		VIT = 200.0 -(FOR + DEX + INT + CON) + EXP*3.0;
 	}
 	
 	public int getEXP() {
@@ -143,7 +149,7 @@ public abstract class Personnage {
 	}
 	
 	// METHODE EVOLUTION DES PERSONNAGES
-	public void evolutionXP(){
+	/*public void evolutionXP(){
 		int validation = 0;
 		Scanner scanner = new Scanner(System.in);
 		do{ 
@@ -194,24 +200,20 @@ public abstract class Personnage {
 					break;
 			}
 		} while (validation == 0);
-	}
+	}*/
 
 	public abstract boolean evolutionFOR();
 	public abstract boolean evolutionDEX();
 	public abstract boolean evolutionINT();
 	public abstract boolean evolutionCON();
 	
-	public void capituler(){
-		
-	}
-	
-	public boolean decede(){
+	public boolean isDead(){
 		if(this.VIT <= 0)
 			return true;
 		return false;
 	}
 	
-	public  void evolutionPossible(){
+	/*public  void evolutionPossible(){
 		if (evolutionFOR()==true)
 			System.out.println("1-Force peut etre augmenter");
 		
@@ -226,7 +228,7 @@ public abstract class Personnage {
 		if (evolutionCON()==true)
 			System.out.println("4-Concentration peut etre augmenter");
 		else System.out.println("Concentration ne peut pas etre augmenter");
-	}
+	}*/
 	
 	public Animation loadAnimation(SpriteSheet spriteSheet, int startX, int endX, int y) {
 	    Animation animation = new Animation();
@@ -308,6 +310,69 @@ public abstract class Personnage {
 
 	public void setSpriteSheet(SpriteSheet[] spriteSheet) {
 		this.spriteSheet = spriteSheet;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((CAP == null) ? 0 : CAP.hashCode());
+		result = prime * result + CON;
+		result = prime * result + DEX;
+		result = prime * result + EXP;
+		result = prime * result + FOR;
+		result = prime * result + INT;
+		long temp;
+		temp = Double.doubleToLongBits(VIT);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + direction;
+		result = prime * result + (moving ? 1231 : 1237);
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + Float.floatToIntBits(x);
+		result = prime * result + Float.floatToIntBits(y);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personnage other = (Personnage) obj;
+		if (CAP == null) {
+			if (other.CAP != null)
+				return false;
+		} else if (!CAP.equals(other.CAP))
+			return false;
+		if (CON != other.CON)
+			return false;
+		if (DEX != other.DEX)
+			return false;
+		if (EXP != other.EXP)
+			return false;
+		if (FOR != other.FOR)
+			return false;
+		if (INT != other.INT)
+			return false;
+		if (Double.doubleToLongBits(VIT) != Double.doubleToLongBits(other.VIT))
+			return false;
+		if (direction != other.direction)
+			return false;
+		if (moving != other.moving)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x))
+			return false;
+		if (Float.floatToIntBits(y) != Float.floatToIntBits(other.y))
+			return false;
+		return true;
 	}
 	
 }

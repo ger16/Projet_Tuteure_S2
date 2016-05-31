@@ -27,7 +27,7 @@ public class BattleEnnemy {
 	public void render(GameContainer container, Graphics g){
 		ennemy.drawCentered(container.getWidth() * 3 / 4, container.getHeight() / 2);
 		Font font = g.getFont();
-		String pv = Integer.toString(p.getVIT());
+		String pv = Integer.toString((int)p.getVIT());
 	    font.drawString(container.getWidth() * 3 / 4 - font.getWidth(pv) / 2, container.getHeight() / 2 - ennemy.getHeight() / 2 - font.getLineHeight(), pv, Color.white);
 	}
 

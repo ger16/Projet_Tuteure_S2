@@ -47,6 +47,18 @@ public class SortDefense extends Capacite implements Defense {
 			EFF += Math.random() * effRand;
 		return EFF;
 	}
+	
+	@Override
+	public boolean attaquer(Personnage attaquant) {return false;}
+
+	@Override
+	public double efficaciteAttaque(Personnage attaquant) {return 0;}
+
+	@Override
+	public boolean seSoigner(Personnage soigneur) {return false;}
+
+	@Override
+	public double efficaciteSoin(Personnage soigneur) {return 0;}
 
 	public int getPUI() {
 		return PUI;

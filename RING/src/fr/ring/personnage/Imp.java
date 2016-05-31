@@ -8,8 +8,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import fr.ring.capacites.Capacite;
+import fr.ring.gui.battle.BattleController;
+import fr.ring.gui.battle.BattleController.BattleCommand;
 
-public class Imp extends Personnage {
+public class Imp extends IA{
 	
 	private  Animation animationAtk = new Animation();
 	private SpriteSheet battleSpriteSheetImp;
