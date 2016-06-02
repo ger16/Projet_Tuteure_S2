@@ -9,7 +9,7 @@ public class Map {
 		
 	
 	public void init() throws SlickException {
-		this.tiledMap = new TiledMap("fr/ring/gui/ressources/map/ring_map.tmx");
+		this.tiledMap = new TiledMap("fr/ring/gui/ressources/map/ring_map2.tmx");
 	}
 	
 	public void renderBackground() {
@@ -19,17 +19,17 @@ public class Map {
 		this.tiledMap.render(0, 0, 3);
 		this.tiledMap.render(0, 0, 4);
 		this.tiledMap.render(0, 0, 5);
-	}
-
-	public void renderForeground() {
 		this.tiledMap.render(0, 0, 6);
+	}
+	
+	public void renderForeground(){
 		this.tiledMap.render(0, 0, 7);
 	}
 	  
 	public boolean isCollision(float x, float y) {
 		int tileW = this.tiledMap.getTileWidth();
 		int tileH = this.tiledMap.getTileHeight();
-		int logicLayer = this.tiledMap.getLayerIndex("Collisions");
+		int logicLayer = this.tiledMap.getLayerIndex("logic");
 		Image tile = this.tiledMap.getTileImage((int) x / tileW, (int) y / tileH, logicLayer);
 		boolean collision = tile != null;
 		if (collision) {
