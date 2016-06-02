@@ -10,6 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.ring.gui.battle.BattleController.BattleCommand;
+import fr.ring.gui.battle.BattleController.CapController;
 import fr.ring.gui.map.MapGameState;
 import fr.ring.personnage.Imp;
 
@@ -17,13 +18,15 @@ public class BattleGameState extends BasicGameState {
 	
 	public static final int ID = 4;
 	public static InputProvider provider;
+	public static InputProvider capProvider;
+	public static InputProvider defenseProvider;
 	private StateBasedGame game;
 	private Image background;
 	private BattleHud battleHud;
 	private BattlePlayer player = new BattlePlayer(MapGameState.p);
 	private Imp i = new Imp();
 	private BattleEnnemy ennemy;
-	BattleController controller;
+	private BattleController controller;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -36,10 +39,23 @@ public class BattleGameState extends BasicGameState {
 		this.ennemy.init();
 	    controller = new BattleController(player, ennemy,container , game);
 	    provider = new InputProvider(container.getInput());
+	    capProvider = new InputProvider(container.getInput());
+	    defenseProvider = new InputProvider(container.getInput());
 	    provider.bindCommand(new KeyControl(Input.KEY_A), BattleCommand.ATTACK);
 	    provider.bindCommand(new KeyControl(Input.KEY_D), BattleCommand.DEFEND);
 	    provider.bindCommand(new KeyControl(Input.KEY_S), BattleCommand.HEAL);
 	    provider.bindCommand(new KeyControl(Input.KEY_C), BattleCommand.SURRENDER);
+		capProvider.bindCommand(new KeyControl(Input.KEY_1), BattleController.CapCommand.CAP_1);
+		capProvider.bindCommand(new KeyControl(Input.KEY_2), BattleController.CapCommand.CAP_2);
+		capProvider.bindCommand(new KeyControl(Input.KEY_3), BattleController.CapCommand.CAP_3);
+		capProvider.bindCommand(new KeyControl(Input.KEY_4), BattleController.CapCommand.CAP_4);
+		capProvider.bindCommand(new KeyControl(Input.KEY_5), BattleController.CapCommand.CAP_5);
+		capProvider.bindCommand(new KeyControl(Input.KEY_6), BattleController.CapCommand.CAP_6);
+		capProvider.bindCommand(new KeyControl(Input.KEY_7), BattleController.CapCommand.CAP_7);
+		capProvider.bindCommand(new KeyControl(Input.KEY_8), BattleController.CapCommand.CAP_8);
+		capProvider.bindCommand(new KeyControl(Input.KEY_9), BattleController.CapCommand.CAP_9);
+		capProvider.bindCommand(new KeyControl(Input.KEY_0), BattleController.CapCommand.CAP_10);
+		defenseProvider.bindCommand(new KeyControl(Input.KEY_1), BattleCommand.DEFEND);
 	    provider.addListener(controller);
 	    this.battleHud = new BattleHud(controller, game);
 	    this.battleHud.init(container, game);
