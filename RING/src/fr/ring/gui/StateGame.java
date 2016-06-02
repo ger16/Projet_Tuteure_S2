@@ -25,7 +25,7 @@ public class StateGame extends StateBasedGame {
 	}
 	
 	public static void main(String[] args) throws SlickException{
-		new AppGameContainer(new StateGame("Ring"), 1000, 800, false).start();
+		new AppGameContainer(new StateGame("Ring"), 800, 600, false).start();
 	}
 
 }

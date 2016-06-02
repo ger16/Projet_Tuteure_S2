@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fr.ring.capacites.Capacite;
 import fr.ring.gui.battle.BattleController.BattleCommand;
+import fr.ring.gui.battle.BattleGameState;
 
 public abstract class IA extends Personnage {
 
@@ -43,7 +44,11 @@ public abstract class IA extends Personnage {
 	public BattleCommand IAprocess(BattleCommand bc) {
 		switch(bc){
 		case ATTACK:
-			return BattleCommand.HEAL;
+			return BattleCommand.DEFEND;
+		case DEFEND:
+			return BattleCommand.ATTACK;
+		case HEAL:
+			return BattleCommand.ATTACK;
 		default:
 			return null;	
 		}

@@ -34,7 +34,9 @@ public class BattleController implements InputProviderListener{
 	private Personnage j1;
 	private GameContainer container;
 	private StateBasedGame game;
-	Image buttonImage;
+	private Image buttonImage;
+	private CapController cc;
+	private DefenseController dc;
 	
 	
 
@@ -59,24 +61,40 @@ public class BattleController implements InputProviderListener{
 	class DefenseController implements InputProviderListener{
 		
 		private Personnage p;
-		private Capacite c;
 		
-		public DefenseController (Personnage p, Capacite c){
+		public DefenseController (Personnage p){
 			this.p = p;
-			this.c = c;
 		}
 		
 		@Override
 		public void controlPressed(Command command) {
 			switch((BattleCommand) command){
+			
 			case DEFEND:
-				resolutionDefense(p, atk, c);
+				if(p instanceof IA){
+					atk = resolutionAttaque(p, p.getCAP().get(0));
+					capAtk = p.getCAP().get(0);
+					hud.addLog(p.getNom() + " vous a attaqué !");
+				}
+				else{
+					BattleGameState.provider.setActive(false);
+					initCapButton(p, "Defense");
+					cc = new CapController(p, (BattleCommand)command);
+					BattleGameState.capProvider.addListener(cc);
+				}
+				break;
+				
 			case REDUCED_DEFEND:
-				resolutionDefenseDiminuee(p, atk, c);
+				BattleGameState.provider.setActive(false);
+				initCapButton(p, "Defense");
+				cc = new CapController(p, BattleCommand.REDUCED_DEFEND);
+				BattleGameState.capProvider.addListener(cc);
 				break;
 			case REDUCED_ATTACK:
-				atk = resolutionAttaqueDiminuee(p, c);
-				capAtk = c;
+				BattleGameState.provider.setActive(false);
+				initCapButton(p, "Attaque");
+				cc = new CapController(p, BattleCommand.REDUCED_ATTACK);
+				BattleGameState.capProvider.addListener(cc);
 				break;
 			default:
 				break;
@@ -101,67 +119,29 @@ public class BattleController implements InputProviderListener{
 
 		@Override
 		public void controlPressed(Command command) {
+			IA ia = (IA) ennemy.getP();
 			switch((CapCommand) command){
 			case CAP_1:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(0));
-					capAtk = BattleController.capButton.get(0);
-					IA ia = (IA) ennemy.getP();
-					controlPressed(ia.IAprocess(bc));
-					BattleGameState.provider.setActive(true);
-				}
-				else if(bc == BattleCommand.DEFEND){
-					DefenseController dc = new DefenseController(p, BattleController.capButton.get(0));
-					BattleGameState.defenseProvider.addListener(dc);
-				}
-				else if(bc == BattleCommand.HEAL){
-					resolutionSoin(p, BattleController.capButton.get(0));
-				}	
+				capControlPressedAction(p, ia,  bc, 0);
+				break;
 			case CAP_2:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(1));
-					capAtk = BattleController.capButton.get(1);
-				}
+				capControlPressedAction(p, ia,  bc, 1);
 			case CAP_3:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(2));
-					capAtk = BattleController.capButton.get(2);
-				}
+				capControlPressedAction(p, ia,  bc, 2);
 			case CAP_4:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(3));
-					capAtk = BattleController.capButton.get(3);
-				}
+				capControlPressedAction(p, ia,  bc, 3);
 			case CAP_5:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(4));
-					capAtk = BattleController.capButton.get(4);
-				}
+				capControlPressedAction(p, ia,  bc, 4);
 			case CAP_6:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(5));
-					capAtk = BattleController.capButton.get(5);
-				}
+				capControlPressedAction(p, ia,  bc, 5);
 			case CAP_7:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(6));
-					capAtk = BattleController.capButton.get(6);
-				}
+				capControlPressedAction(p, ia,  bc, 6);
 			case CAP_8:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(7));
-					capAtk = BattleController.capButton.get(7);
-				}
+				capControlPressedAction(p, ia,  bc, 7);
 			case CAP_9:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(8));
-					capAtk = BattleController.capButton.get(8);
-				}
+				capControlPressedAction(p, ia,  bc, 8);
 			case CAP_10:
-				if(bc == BattleCommand.ATTACK){
-					atk = resolutionAttaque(p, BattleController.capButton.get(9));
-					capAtk = BattleController.capButton.get(9);
-				}
+				capControlPressedAction(p, ia,  bc, 9);
 			}
 		}
 
@@ -192,7 +172,7 @@ public class BattleController implements InputProviderListener{
 				else{
 					BattleGameState.provider.setActive(false);
 					initCapButton(p, "Attaque");
-					CapController cc = new CapController(p, (BattleCommand)command);
+					cc = new CapController(p, (BattleCommand)command);
 					BattleGameState.capProvider.addListener(cc);			
 				}					
 				break;
@@ -204,7 +184,8 @@ public class BattleController implements InputProviderListener{
 				else{
 					BattleGameState.provider.setActive(false);
 					initCapButton(p, "Defense");
-					DefenseController dc = new DefenseController(p, c);
+					dc = new DefenseController(p);
+					BattleGameState.defenseProvider.addListener(dc);
 					
 				}
 			case HEAL:
@@ -222,11 +203,48 @@ public class BattleController implements InputProviderListener{
 				
 	}
 	
+	public void capControlPressedAction(Personnage p, IA ia, BattleCommand bc, int i){
+		if(bc == BattleCommand.ATTACK){
+			atk = resolutionAttaque(p, BattleController.capButton.get(0));
+			capAtk = BattleController.capButton.get(0);
+			controlPressed(ia.IAprocess(bc));
+			BattleGameState.capProvider.removeListener(cc);
+			BattleGameState.provider.setActive(true);
+		}
+		else if(bc == BattleCommand.DEFEND){
+			resolutionDefense(p, atk, BattleController.capButton.get(0));
+			controlPressed(ia.IAprocess(bc));
+			BattleGameState.defenseProvider.removeListener(dc);
+			BattleGameState.capProvider.removeListener(cc);
+			BattleGameState.provider.setActive(true);
+		}
+		else if(bc == BattleCommand.REDUCED_DEFEND){
+			resolutionDefenseDiminuee(p, atk, BattleController.capButton.get(0));
+			controlPressed(ia.IAprocess(BattleCommand.DEFEND));
+			BattleGameState.defenseProvider.removeListener(dc);
+			BattleGameState.capProvider.removeListener(cc);
+			BattleGameState.provider.setActive(true);
+		}
+		else if(bc == BattleCommand.REDUCED_ATTACK){
+			resolutionAttaqueDiminuee(p, BattleController.capButton.get(0));
+			controlPressed(ia.IAprocess(BattleCommand.ATTACK));
+			BattleGameState.defenseProvider.removeListener(dc);
+			BattleGameState.capProvider.removeListener(cc);
+			BattleGameState.provider.setActive(true);
+		}
+		else if(bc == BattleCommand.HEAL){
+			resolutionSoin(p, BattleController.capButton.get(0));
+			controlPressed(ia.IAprocess(BattleCommand.HEAL));
+			BattleGameState.capProvider.removeListener(cc);
+			BattleGameState.provider.setActive(true);
+		}
+	}
+	
 	public void initCapButton(Personnage p, String nomInterface){
 		switch(nomInterface){
 		case "Attaque":
 			for(int i=0; i<p.getCAP().size(); i++){
-				if(p.getCAP().get(i).containInterfaces("Attaque")){
+				if(p.getCAP().get(i).containInterfaces("Attaque")){HEAL
 					capButton.add(p.getCAP().get(i));
 				}
 			}
