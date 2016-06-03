@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.command.BasicCommand;
 import org.newdawn.slick.command.Command;
 import org.newdawn.slick.command.InputProvider;
 import org.newdawn.slick.command.InputProviderListener;
@@ -37,10 +38,8 @@ public class BattleController implements InputProviderListener{
 	private Image buttonImage;
 	private CapController cc;
 	private DefenseController dc;
-	
-	
-
-
+	private KeyControl kF1 = new KeyControl(Input.KEY_F1);
+	private KeyControl kF2 = new KeyControl(Input.KEY_F2);
 		
 	public BattleController(BattlePlayer player, BattleEnnemy ennemy,GameContainer container,  StateBasedGame game) throws SlickException{
 		this.player = player;
@@ -51,7 +50,7 @@ public class BattleController implements InputProviderListener{
 	}
 	
 	public enum BattleCommand implements Command {
-		ATTACK, REDUCED_ATTACK, DEFEND, REDUCED_DEFEND, HEAL, SURRENDER
+		ATTACK, REDUCED_ATTACK, DEFEND, REDUCED_DEFEND, VOIR_ATTAQUE, HEAL, SURRENDER
 	}
 	
 	public enum CapCommand implements Command {		
@@ -72,9 +71,7 @@ public class BattleController implements InputProviderListener{
 			
 			case DEFEND:
 				if(p instanceof IA){
-					atk = resolutionAttaque(p, p.getCAP().get(0));
-					capAtk = p.getCAP().get(0);
-					hud.addLog(p.getNom() + " vous a attaqué !");
+					resolutionDefense(p, atk, p.getCAP().get(0));
 				}
 				else{
 					BattleGameState.provider.setActive(false);
@@ -83,15 +80,26 @@ public class BattleController implements InputProviderListener{
 					BattleGameState.capProvider.addListener(cc);
 				}
 				break;
-				
+			
+			case VOIR_ATTAQUE:
+				BattleGameState.defenseProvider.clearCommand(BattleCommand.VOIR_ATTAQUE);
+				BattleGameState.defenseProvider.unbindCommand(kF1);
+				BattleGameState.defenseProvider.unbindCommand(kF2);
+				hud.addLog("Appuyez sur F1 pour vous defendre ou sur F2 pour encaisser l'attaque puis attaquer en retour");
+				BattleGameState.defenseProvider.bindCommand(kF1, BattleCommand.REDUCED_DEFEND);
+				BattleGameState.defenseProvider.bindCommand(kF2, BattleCommand.REDUCED_ATTACK);
+				break;
+			
 			case REDUCED_DEFEND:
 				BattleGameState.provider.setActive(false);
+				BattleGameState.defenseProvider.clearCommand(BattleCommand.REDUCED_DEFEND);
 				initCapButton(p, "Defense");
 				cc = new CapController(p, BattleCommand.REDUCED_DEFEND);
 				BattleGameState.capProvider.addListener(cc);
 				break;
 			case REDUCED_ATTACK:
 				BattleGameState.provider.setActive(false);
+				BattleGameState.defenseProvider.clearCommand(BattleCommand.REDUCED_ATTACK);
 				initCapButton(p, "Attaque");
 				cc = new CapController(p, BattleCommand.REDUCED_ATTACK);
 				BattleGameState.capProvider.addListener(cc);
@@ -126,22 +134,31 @@ public class BattleController implements InputProviderListener{
 				break;
 			case CAP_2:
 				capControlPressedAction(p, ia,  bc, 1);
+				break;
 			case CAP_3:
 				capControlPressedAction(p, ia,  bc, 2);
+				break;
 			case CAP_4:
 				capControlPressedAction(p, ia,  bc, 3);
+				break;
 			case CAP_5:
 				capControlPressedAction(p, ia,  bc, 4);
+				break;
 			case CAP_6:
 				capControlPressedAction(p, ia,  bc, 5);
+				break;
 			case CAP_7:
 				capControlPressedAction(p, ia,  bc, 6);
+				break;
 			case CAP_8:
 				capControlPressedAction(p, ia,  bc, 7);
+				break;
 			case CAP_9:
 				capControlPressedAction(p, ia,  bc, 8);
+				break;
 			case CAP_10:
 				capControlPressedAction(p, ia,  bc, 9);
+				break;
 			}
 		}
 
@@ -154,53 +171,76 @@ public class BattleController implements InputProviderListener{
 	@Override
 	public void controlPressed(Command command) {
 		Personnage p;
-		if(nbTours == 0)
+		System.out.println(nbTours);
+		if(nbTours == 0){
 			p = j1;
-		else
+			nbTours++;
+			System.out.println(p.getNom());
+		}
+		else{
 			p = joueurActif();
+			System.out.println(p.getNom());
+		}
 		/*if(p.equals(ennemy.getP())){
 			BattleGameState.provider.setActive(false);
 		}*/
-		if(p.equals(player.getP())){
-			switch ((BattleCommand) command){
-			case ATTACK:
-				if(p instanceof IA){
-					atk = resolutionAttaque(p, p.getCAP().get(0));
-					capAtk = p.getCAP().get(0);
-					hud.addLog(p.getNom() + " vous a attaqué !");
+		switch ((BattleCommand) command){
+		case ATTACK:
+			if(p instanceof IA){
+				atk = resolutionAttaque(p, p.getCAP().get(0));
+				capAtk = p.getCAP().get(0);
+				hud.addLog(p.getNom() + " vous a attaque !");
+			}
+			else{
+				BattleGameState.provider.setActive(false);
+				initCapButton(p, "Attaque");
+				cc = new CapController(p, (BattleCommand)command);
+				BattleGameState.capProvider.addListener(cc);			
+			}					
+			break;
+		case DEFEND: 
+			if(p instanceof IA){
+				if(atk == 0){
+					hud.addLog("Defense le vent");
 				}
 				else{
-					BattleGameState.provider.setActive(false);
-					initCapButton(p, "Attaque");
-					cc = new CapController(p, (BattleCommand)command);
-					BattleGameState.capProvider.addListener(cc);			
-				}					
-				break;
-			case DEFEND: 
-				if(p instanceof IA){
 					resolutionDefense(p, atk, p.getCAP().get(0));
-					hud.addLog(p.getNom() + " s'est défendu !");
+					hud.addLog(p.getNom() + " s'est defendu !");
+				}
+			}
+			else{
+				if(atk == 0){
+					hud.addLog("Il n'y a pas eu d'attaque precedemment");
 				}
 				else{
 					BattleGameState.provider.setActive(false);
-					initCapButton(p, "Defense");
+					hud.addLog("Appuyez sur F1 pour une defense immediate ou F2 pour voir les degats de votre adversaire puis agir");
 					dc = new DefenseController(p);
 					BattleGameState.defenseProvider.addListener(dc);
-					
 				}
-			case HEAL:
-				resolutionSoin(p, p.getCAP().get(1));
-				break;
-			case SURRENDER:
-				game.enterState(MapGameState.ID);break;
-			default: break;
 			}
+			break;
+		case HEAL:
+			if(p instanceof IA){
+				resolutionSoin(p, p.getCAP().get(1));
+				hud.addLog(p.getNom() + " s'est soigne !");
+			}
+			else{
+				BattleGameState.provider.setActive(false);
+				initCapButton(p, "Soin");
+				cc = new CapController(p, (BattleCommand)command);
+				BattleGameState.capProvider.addListener(cc);
+			}
+			break;
+		case SURRENDER:
+			game.enterState(MapGameState.ID);break;
+		default: break;
 		}
 	}
 
 	@Override
 	public void controlReleased(Command arg0) {
-				
+			
 	}
 	
 	public void capControlPressedAction(Personnage p, IA ia, BattleCommand bc, int i){
@@ -209,6 +249,7 @@ public class BattleController implements InputProviderListener{
 			capAtk = BattleController.capButton.get(0);
 			controlPressed(ia.IAprocess(bc));
 			BattleGameState.capProvider.removeListener(cc);
+			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.DEFEND){
@@ -216,6 +257,7 @@ public class BattleController implements InputProviderListener{
 			controlPressed(ia.IAprocess(bc));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
+			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.REDUCED_DEFEND){
@@ -223,6 +265,7 @@ public class BattleController implements InputProviderListener{
 			controlPressed(ia.IAprocess(BattleCommand.DEFEND));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
+			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.REDUCED_ATTACK){
@@ -230,12 +273,14 @@ public class BattleController implements InputProviderListener{
 			controlPressed(ia.IAprocess(BattleCommand.ATTACK));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
+			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.HEAL){
 			resolutionSoin(p, BattleController.capButton.get(0));
 			controlPressed(ia.IAprocess(BattleCommand.HEAL));
 			BattleGameState.capProvider.removeListener(cc);
+			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 	}
@@ -244,7 +289,7 @@ public class BattleController implements InputProviderListener{
 		switch(nomInterface){
 		case "Attaque":
 			for(int i=0; i<p.getCAP().size(); i++){
-				if(p.getCAP().get(i).containInterfaces("Attaque")){HEAL
+				if(p.getCAP().get(i).containInterfaces("Attaque")){
 					capButton.add(p.getCAP().get(i));
 				}
 			}
@@ -255,7 +300,7 @@ public class BattleController implements InputProviderListener{
 					capButton.add(p.getCAP().get(i));
 				}
 			}
-				break;
+			break;
 		case "Soin":
 			for(int i=0; i<p.getCAP().size(); i++){
 				if(p.getCAP().get(i).containInterfaces("Soin")){
@@ -263,6 +308,15 @@ public class BattleController implements InputProviderListener{
 				}
 			}
 			break;
+		}
+		for(int i=0; i<p.getCAP().size(); i++){
+			System.out.println(p.getCAP().get(i).getNom());
+		}
+		for(int i=0; i<capButton.size(); i++){
+			System.out.println((i + 1) + " : " + capButton.get(i).getNom());
+		}
+		if(capButton.isEmpty()){
+			System.out.println("Tu es un connard");
 		}
 		hud.addLog("Quelle compétence choississez vous ?");
 		for(int i=0; i<capButton.size(); i++){
@@ -346,9 +400,9 @@ public class BattleController implements InputProviderListener{
 		if(c.seDefendre(p))
 			EFF_D = c.efficaciteDefense(p);
 		if(p.equals(player.getP()))
-			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
+			player.getP().setVIT(player.getP().getVIT() - (EFF_A - EFF_D));
 		else
-			this.player.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
+			ennemy.getP().setVIT(ennemy.getP().getVIT() - (EFF_A - EFF_D));
 	    if(EFF_D != 0)
 	    	hud.addLog("Nombre de PV absorbés : " + EFF_D);
 	    else
@@ -397,5 +451,21 @@ public class BattleController implements InputProviderListener{
 	
 	public BattleHud getHud(){
 		return hud;
+	}
+
+	public KeyControl getkF1() {
+		return kF1;
+	}
+
+	public void setkF1(KeyControl kF1) {
+		this.kF1 = kF1;
+	}
+
+	public KeyControl getkF2() {
+		return kF2;
+	}
+
+	public void setkF2(KeyControl kF2) {
+		this.kF2 = kF2;
 	}
 }

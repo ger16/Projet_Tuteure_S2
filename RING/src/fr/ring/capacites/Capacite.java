@@ -35,8 +35,8 @@ public abstract class Capacite{
 	public abstract double efficaciteSoin(Personnage soigneur);
 	
 	public boolean containInterfaces(String name){
-		for(int i=0; i < this.getClass().getInterfaces().length; i++){
-			if(this.getClass().getInterfaces()[i].getName().contains(name))
+		for(int i=0; i < this.getClass().getSuperclass().getInterfaces().length; i++){
+			if(this.getClass().getSuperclass().getInterfaces()[i].getName().contains(name))
 				return true;
 		}
 		return false;

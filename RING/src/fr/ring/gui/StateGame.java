@@ -17,6 +17,7 @@ public class StateGame extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new MainScreenGameState());
+		addState(new NameAssignState());
 		addState(new CreateCharacterGameState());
 		addState(new SkillAssignmentGameState());
 		addState(new MapGameState());

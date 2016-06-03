@@ -43,7 +43,7 @@ public class BattleHud {
 		defendButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 4, new ButtonListener(DEFENDRE));
 		healButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 3, new ButtonListener(SOIGNER));
 		surrenderButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 2, new ButtonListener(CAPITULER));
-		log = new TextArea(SPACE + attackButton.getWidth() + SPACE, attackButton.getY(), container.getWidth() - attackButton.getWidth() - SPACE * 3, buttonImage.getHeight() * 3 + SPACE * 2);
+		log = new TextArea(SPACE + attackButton.getWidth() + SPACE, attackButton.getY(), container.getWidth() - attackButton.getWidth() - SPACE * 3, buttonImage.getHeight() * 3 + SPACE * 5);
 		log.setBottomUp(true);
 		log.setDefaultFont(container.getDefaultFont());
 		this.controller.setHud(this);

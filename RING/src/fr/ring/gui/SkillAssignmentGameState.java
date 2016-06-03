@@ -115,13 +115,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 				MapGameState.p.setCON(MapGameState.p.getCON() - 1);
 				break;
 			case TERMINER :
-				try{
-					game.getState(MapGameState.ID).init(container, game);
-				}
-				catch(SlickException e){
-					e.getMessage();
-				}
-				game.enterState(MapGameState.ID);
+				game.enterState(NameAssignState.ID);
 				break;
 			}
 		}

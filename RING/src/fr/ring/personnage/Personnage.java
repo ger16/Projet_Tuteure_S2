@@ -56,8 +56,10 @@ public abstract class Personnage {
 		EXP = 1;
 		CAP = cAP;
 		cAP.add(new Epee());
+		cAP.get(0).setNom("Escalibure");
 		cAP.add(new ToucheGuerrisseur());
-	}
+		cAP.get(1).setNom("Soin");
+		}
 	
 	public Personnage( Personnage hero){
 		this.nom = hero.getNom();
