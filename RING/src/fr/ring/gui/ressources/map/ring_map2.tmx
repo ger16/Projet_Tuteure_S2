@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="14">
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="terrain_atlas.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="1025" name="obj_misk_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="obj_misk_atlas.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="2049" name="build_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="build_atlas.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="3073" name="7DRL-Tiles2" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="7DRL-Tiles2.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="3137" name="colision" tilewidth="32" tileheight="32" tilecount="25" columns="5">
+  <image source="collision.png" width="160" height="160"/>
+ </tileset>
+ <tileset firstgid="3162" name="attack - sword" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="imp/attack - sword.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="3226" name="attack - sword shield" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="imp/attack - sword shield.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="3290" name="attack - pitchfork" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="imp/attack - pitchfork.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="3354" name="attack - pitchfork shield" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="imp/attack - pitchfork shield.png" width="256" height="256"/>
+ </tileset>
+ <layer name="Eau" width="100" height="100" offsetx="0" offsety="-1">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3RwQnCQBRF0cF1+plezC7pvwdtQBAD8TKcB6eA/+98jDH56O79+946PVr0aNGjRY8WPVr0aNGjRY8WPVr0aNHjN89tjH3To+J4tzj1WJ4eLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXpc/58e69KjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aDEzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzs+/2AvpS635AnAAA
+  </data>
+ </layer>
+ <layer name="Ile au dessus de la mer" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3cXWrCUBSF0dNk5G1HUh1I/RmJ7UQaEaEU+hDjzd22a8FB8Ol4vxB9kFQBAH/Bfqg6rDTHofenzXeazuhjpflc0KP1dZNyrTxKj9Z7LtntnvTQI3FPPbL2TOnxNFYNK8043r7nf+nxKPTIokcWPbLokUWPLHpk0SOLHln0yKJHFj2y6JFFjyx6ZNEjix5Z9MiiRxY9suiRRY8semTRI4seWfTIokcWPbLoUfU8Vr00nNcZ/6/Wo+ptOq9Nw9nqMYseWfTIokcWPbLokUWPLHpk0SOLHln0yKJHFj2yJPVo2UKP5T12dRk9cu5Xu7q8vtfyNnrcp8e1xXn06NPj3OBnj+/v69Gvx3V8f/S/X/l91a9HyxZ66HGL/XReh4ZznNGj9XMelzzbEQAAAAAAAAAAAAAAAADgN1/Nvn89QJwAAA==
+  </data>
+ </layer>
+ <layer name="Deuxième sol" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3VSQoCMRAF0CTqQZwO4nQQp4M73cMSFNzYuEq39nvw4ZNVqFpUSgAAAAAAAAAAAAAAAAAAAAAAAAAA8J9OOaVz5BK5Pvt7Xu+33PZP++Gxj1JSGkSG5XMflbZ/2g855jyJTCOzhj63jyrGMedlZBVZN/SNfVSx+HLO7kcd7ke3uB/d4n50yzbmvIvsI4eGfrQPAAAAAAAAAAAAAAAAAAD4CXffNOBoQJwAAA==
+  </data>
+ </layer>
+ <layer name="sol" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2cSVIUQRiFM1C7sUGFE7hzAIeVbt05AGqE85KFoRHqSsEToAvdOmxdoAvD4RKoXITBGW7gy7BTM34yK7OrkuquqvdFvMjqsqkm3suh/qxGpQjpD2fb6tUhqN+/R5VJ6eE5XOewuNaRtlJHoWPQ8XaKT6k3Lg/zMoXrTIhrzSCD89AF6GLD84jpmy4P8zKN60xWbL7a3ynvs2L6ZhU9TMmpEvPIQ5n9pQnMDSk1n1MPhwa/v1SNl0PF5OISMrrS+dtqXbbaK+KcfK3b+QZn/AyePs+pF5487sPPuc7fVuuB1c6Jc/L1g4bnsR1oP0/gfuBk956g12PmkRbt51V4e63rb6/HzCOemPpc+zkPbx8af3s9rlge8EOhRlaoy9RkyTVsTH1e1M+q5YE+qn3RtbKuz4pea0t/z6rTY+rzpuWREld/z6rTY+rzOuaRYh+17P0oQx3zSLGP2q/9KFNXSF2DrkM3Ov73zA1o/bEd/Zbkx9Vvy3hWw+dB8YTmnxT3wXwelA7XffBqS6k1aB36Cn2DvkM/oJ/QL+g3tAFttsr/nZ/uLP8zeyWlhy3k0oaGod1QBxqBRqE90F5oHzQGjXM8OOm3h1xDyiPGa64h5eHzmt+FSkOquSXl93jqTOgeNjS3xOYl689+7iEPMkX3cmPXAll/ptxDJoQQUk36Wd/x+4tb6Wd9V+fvL8bcg6au67h34ifmHjRPXZeVIfdOipHnuSJr8+0jz/NwPhseLJr+NzaEkHK5ueN/a47t8773k/Tk8VbmRoqT5emjHVv1OIf/Lazzqy2u9THYWSxYvq90tdqVfSwzkteRtJHHGvOIwvi4YPm+Io5lLva520rNvgmMmWHksc48olkQY2DF4bvvtc7DjBkfu5HHV+aRiT0ufDnY40LmtSry0DLjRM5dHeTxjXkEWfBkIH33zVWy9eUxgjy+M48gixHzkhwbT4b+S+bkW0dGkccP5hFk0ZODLwuTh93a7/HlsQd5/GQeQeT48I0V+9geH/JnfHnsRR6/CubRhGe2rvHhWheyzrnykOvHPuTxW+TRa43oembbQZ8YCWjU8/9xDCJL8O21Z17Kysc3pnx5jMH7DeF9ihpxAl5PBnSkQnloFiPupeS/+TLxzVfj8H5TeG/XiO9aSt2C3nZbrffQB+hjxt+m1CkP04cXM/wNzVP2sR5nnz15uDA1Yhta34WxAn0RMufOttSs6xp1ysMg88iaj7Lq9NCeicTUiK1uHlrLQuZcE/Kwx0dorXZlhLpcnekqTx6mRrTzsLVsjY8zDcpjybFGhOam7j7iv9efepyrNKZGHPbkYedyukF5GEJrh9QnTw6xz6fsGvEA1uyD0CGrtc/5qFsetndLlschZY2F2DxS1Ih1ykNjMrGzka+3C1eN2CtT8Ho6oJkK5VGUItm5asReuQOv7wZ0r0F5FMFVIxJCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEVIU/fR6oI0CcAAA=
+  </data>
+ </layer>
+ <layer name="sol2" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3aPUoDQRgG4EHJQuzUK8QDqFUiYqMHiIJH8BJaipewsUgK/8DaWgs7j+QnBgwxyCSwmdU8D3ywDLswvO82w25KAMB/010rvQP+kn3vCwAAAAAAAAAAALBge/5fBAAAaITTlZ9rT1PWKOddHwBL73K19A4AWEbrcRbZyJxN55babUfGO5mzm9lHzzfbufUj4+PMnE8y7zuY6OO5ndJ5xly0Z9s787mWc6Poo4y3Kt3cxkyu66MMfTSLPso7q76v9bF4n/lH5uku5j7mIeax+lof72acPupzVf0+0+ijHp3Ie2uU+aCV0rCV95w+6nEYXRyN+niJLl71AQAAAAAAAAAAAAAAAADAjD4A2JJAZ0CcAAA=
+  </data>
+ </layer>
+ <layer name="sol3" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3YTUrDQBgG4E+DP+A9VNB7uPAS7vUY0nOIrryGSg+iUBdewhlsaFqCtJkpqfg88EKbRTrkzZeGiQAAAAAAAAAAAAAAAAAAAACA/+W+Wf6+vzfOOog4TDlaM8cpk6b/PJSZNj9zcJo+n62Z8zA729Cdia/YrI+3+XyYkzryXGwyE6t9UM+QZ9RqniNu8rk8t+op6cOM1NPe0/oYX+6ijT52hz52x6TC/7k+6tPHbinp4yTK3nU/D+Lhtww/89805Hk1Tbma56Lw99trro/h71d5JmbzXBeuwXwsy31cxuJ+7+Yx5anneJ6J3EXel7+tsAZ9LOT9wPye1d7v3bykvPYcb2fCHsl23MXi2nav8XvKxxgLAgAAAAAAAAAAAAAAAAAAoNg3Ci2u8UCcAAA=
+  </data>
+ </layer>
+ <layer name="trou" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3RMQ5AQBCG0W32kGg5BFoOgcuabKMR7SjeS75M+ydTCgAAAAAAAAAAAAAAAAAAAAAA8Gdd1EdD9hCaOVqiNXsIzRGd0ZU9BAAAAAA+jLWUqT6XXFv8YK/PBQAAAAAAAAAAAAAAAAAAeHMDSpyF6ECcAAA=
+  </data>
+ </layer>
+ <layer name="devant" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3VMU4CQRgF4Kk3W6MdngLt8AyGSgoJHkTPIYVGbyUdXoS/oGNMxtnNuAnfl7zMK/6CsMVLCQAAAADgsjz2Ka378/4W7+7Uv+PdZzrj28Z/+9yf9894v079EO9PptPGrEvpKnLd/fcvuSyrLp9F5DZyF3n45WblW41uHrnJ9No7hllG7jO99o5hniKbTK+9Y5iXyGum194xzHvkI9Nr7xhP6Z7TRume00bpntNG6Z7TRume04Y9nxZ7Pi32fFrs+bTYcwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/uII1vqHukCcAAA=
+  </data>
+ </layer>
+ <layer name="logic" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3cW26DMBSEYRbApvLSy0Ojpt3/XlrURqLUdsY+YIbk/ySkBIoCZ8BcihkGAABwD97GYXjqOLyOe6+xt3l9Th1q1ZLHywNtKz2XYcr743t4rhw+x595t95eHi2PLZzG2DBff4daOCxDBHm0m9a/5fzhXGir5rWdf1c/u+XR0p5HhtbjeU60hm55HAF5eCEPL+ThhTy8kIeXUh6564rL7zzvN64/LuRRrZTHmshDQx5elPZq+bnl78hDQx5eaK+8kIcX8vCi5qEeP3LIQ0MeXmivvJCHF/LwwvHDC3l4ob3yQh5eyMMLeXghDy/k4YU8vJCHV58k8linBqnr4eU48tBsVQPyaNNag9o+fuShUWpQ2zcshTw0t2pQ29818swTeejPMKvYP2JyNWjtA04eMakaRPrkL5/XvCIPzdr7R25e8tAsa5Datmul5lWv43s4Sh7KeasiMm+P3zhKHldb5KG8r+EcOI9rfXeGm155bH38qFneo+Ux2TOPlut/8shL1U3NQ/ld5X5yydHy2LO9Io+/35V2obTu0ftX5PF/XK6m83G56dH7JeSRn5Y6pyxNW+t+O8fztFItbu0rS5zvaiL/H6y5lq9pr06L/URdHtU95lGLPDRuebS6lzym9xT1eP7qItTAaVkAAAAAAAAAAAAAAAAAAAAAAAAAAHD3BZmf0/9AnAAA
+  </data>
+ </layer>
+ <objectgroup name="triggers" width="1" height="1">
+  <object id="2" name="boss1" type="teleport" x="1605" y="411" width="52" height="57"/>
+  <object id="4" name="boss2" type="teleport" x="1698" y="412" width="58" height="58"/>
+  <object id="5" name="boss3" type="teleport" x="1794" y="413" width="55" height="56"/>
+  <object id="6" name="boss4" type="teleport" x="1895" y="410" width="50" height="54"/>
+  <object id="7" name="boss5" type="teleport" x="1988" y="412" width="55" height="53"/>
+  <object id="8" name="healZone" type="heal" x="1384" y="1699" width="332" height="274"/>
+  <object id="10" name="bossfarida" type="teleport" x="610" y="1860" width="61" height="49"/>
+ </objectgroup>
+</map>

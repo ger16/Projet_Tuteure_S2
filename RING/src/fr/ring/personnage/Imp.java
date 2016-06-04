@@ -80,4 +80,7 @@ public class Imp extends IA{
 		this.battleSpriteSheetImp = battleSpriteSheetImp;
 	}
 
+	@Override
+	public void initWalkCycle() throws SlickException {}
+
 }

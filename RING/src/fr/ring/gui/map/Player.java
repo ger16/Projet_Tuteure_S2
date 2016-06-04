@@ -9,7 +9,7 @@ import org.newdawn.slick.SpriteSheet;
 import fr.ring.personnage.*;
 
 public class Player {
-	Personnage p;
+	private Personnage p;
 	private Map map;
 	
 	public Player(Personnage p, Map map){
@@ -18,16 +18,7 @@ public class Player {
 	}
 	
 	public void init() throws SlickException {
-		if(p instanceof Guerrier){
-			((Guerrier) p).initWalkCycle();
-		}
-		else if(p instanceof Mage){
-			((Mage) p).initWalkCycle();
-		}
-		else if(p instanceof Chasseur){
-			((Chasseur) p).initWalkCycle();
-		}
-		
+		p.initWalkCycle();
 	}
 	
 	public void render(Graphics g) throws SlickException {
@@ -76,6 +67,14 @@ public class Player {
 			case 2: futurY = p.getY() + .1f * delta; break;
 		}
 		return futurY;
+	}
+
+	public Personnage getP() {
+		return p;
+	}
+
+	public void setP(Personnage p) {
+		this.p = p;
 	}
 	
 }

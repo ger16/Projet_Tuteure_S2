@@ -1,9 +1,12 @@
 package fr.ring.personnage;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import fr.ring.capacites.Capacite;
@@ -36,14 +39,6 @@ public abstract class Personnage {
 	private Animation[] animationsCorps = new Animation[8];
 	
 	public Personnage() {
-	/*	nom = "Farida";
-		FOR = 0;
-		DEX = 0;
-		INT = 0;
-		CON = 0;
-		VIT = 200 -(FOR + DEX + INT + CON) + EXP*3;
-		EXP = 1;
-		*/
 	}
 
 	public Personnage(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP) {
@@ -71,8 +66,6 @@ public abstract class Personnage {
 		this.EXP = hero.getEXP();
 		this.CAP = hero.getCAP();
 	}
-
-	// GETTERS SETTERS
 	
 	public String getNom() {
 		return nom;
@@ -150,87 +143,20 @@ public abstract class Personnage {
 		}
 	}
 	
-	// METHODE EVOLUTION DES PERSONNAGES
-	/*public void evolutionXP(){
-		int validation = 0;
-		Scanner scanner = new Scanner(System.in);
-		do{ 
-			evolutionPossible();
-			System.out.println("Quel competence voulez vous augmenter?");
-			int choix = scanner.nextInt();
-			
-			switch(choix){
-			
-			case 1:// FORCE 
-					if (evolutionFOR()==true){
-						setFOR(getFOR()+1);
-						validation ++;
-						break;
-					}
-					else{
-						System.out.println("Impossible d'augmenter Force");
-						break;
-					}
-			
-			case 2:// DEXTERITE
-					if (evolutionDEX()==true){
-						setDEX(getDEX()+1);
-						validation++;
-						break;}
-					else{
-						System.out.println("Impossible d'augmenter Dexterite");
-						break;}
-			
-			case 3: //INTELLIGENCE
-					if (evolutionINT()==true){
-						setINT(getINT()+1);
-						validation++;
-						break;}
-					else{
-						System.out.println("Impossible d'augmenter Intelligence");
-						break;}
-			case 4: // CONCENTRATION
-					if (evolutionCON()==true){
-						setCON(getCON()+1);
-						validation++;
-						break;}
-					else{
-						System.out.println("Impossible d'augmenter Concentration");
-						break;}
-			default:
-					System.out.println("Saississez une valeur correcte");
-					break;
-			}
-		} while (validation == 0);
-	}*/
+	public abstract void initWalkCycle() throws SlickException;
 
 	public abstract boolean evolutionFOR();
 	public abstract boolean evolutionDEX();
 	public abstract boolean evolutionINT();
 	public abstract boolean evolutionCON();
 	
+
+	
 	public boolean isDead(){
 		if(this.VIT <= 0)
 			return true;
 		return false;
 	}
-	
-	/*public  void evolutionPossible(){
-		if (evolutionFOR()==true)
-			System.out.println("1-Force peut etre augmenter");
-		
-		if (evolutionDEX()==true)
-			System.out.println("2-Dexterite peut etre augmenter");
-		else System.out.println("Dexterite ne peut pas etre augmenter");
-		
-		if (evolutionINT()==true)
-			System.out.println("3-Intelligence peut etre augmenter");
-		else System.out.println("Inteligence ne peut pas etre augmenter");
-		
-		if (evolutionCON()==true)
-			System.out.println("4-Concentration peut etre augmenter");
-		else System.out.println("Concentration ne peut pas etre augmenter");
-	}*/
 	
 	public Animation loadAnimation(SpriteSheet spriteSheet, int startX, int endX, int y) {
 	    Animation animation = new Animation();
@@ -239,6 +165,58 @@ public abstract class Personnage {
 	    }
 	    return animation;
 	}
+	public void sauvergarderHero(Personnage p){
+
+		try{
+			File r = new File("Sauvergarde");
+			File f = new File(r,""+getNom()+".txt");
+			PrintWriter w = new PrintWriter(f);
+			if (p instanceof Mage)
+				w.println("Mage");
+			if (p instanceof Chasseur)
+				w.println("Chasseur");
+			if (p instanceof Guerrier)
+				w.println("Guerrier");
+		
+			w.println(getFOR());
+			w.println(getDEX());
+			w.println(getINT());
+			w.println(getCON());
+			System.out.println("Sauvergarde reussi théoriquement");
+			w.close();}
+		catch(Exception e){ 
+			System.out.println("Fichier non trouvé");
+		}
+	}
+
+	public Personnage chargerHero(){
+		try{
+			File r = new File("Sauvergarde");
+			File f = new File(r,""+nom+".txt");
+			Scanner sc = new Scanner(f);
+				
+			String type = sc.nextLine();
+			int For= Integer.parseInt(sc.nextLine());
+			int Dex= Integer.parseInt(sc.nextLine());
+			int Int= Integer.parseInt(sc.nextLine());
+			int Con= Integer.parseInt(sc.nextLine());
+			sc.close();
+
+			if (type.equals("Mage"))
+				return new Mage (nom,For,Dex,Int,Con);
+			if (type.equals("Guerrier"))
+				return new Mage (nom,For,Dex,Int,Con);
+			if (type.equals("Chasseur"))
+				return new Mage (nom,For,Dex,Int,Con);
+			
+			} catch (Exception e) {
+				System.out.println("Erreur de chargement"+e);
+				}
+			return null;
+		}
+	
+	
+}
 
 	public float getX() {
 		return x;

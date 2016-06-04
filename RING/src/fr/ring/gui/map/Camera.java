@@ -10,8 +10,8 @@ public class Camera {
 	
 	public Camera(Player player) {
 		this.player = player;
-		this.xCamera = player.p.getX();
-		this.yCamera = player.p.getY();
+		this.xCamera = player.getP().getX();
+		this.yCamera = player.getP().getY();
 	}
 	
 	public void place(GameContainer container, Graphics g) {
@@ -21,18 +21,18 @@ public class Camera {
 	
 	public void update(GameContainer container) {
 		int w = container.getWidth() / 4;
-		if (this.player.p.getX() > this.xCamera + w) {
-			this.xCamera = this.player.p.getX() - w;
+		if (this.player.getP().getX() > this.xCamera + w) {
+			this.xCamera = this.player.getP().getX() - w;
 		} 
-		else if (this.player.p.getX() < this.xCamera - w) {
-			this.xCamera = this.player.p.getX() + w;
+		else if (this.player.getP().getX() < this.xCamera - w) {
+			this.xCamera = this.player.getP().getX() + w;
 		}
 		int h = container.getHeight() / 4;
-		if (this.player.p.getY() > this.yCamera + h) {
-			this.yCamera = this.player.p.getY() - h;
+		if (this.player.getP().getY() > this.yCamera + h) {
+			this.yCamera = this.player.getP().getY() - h;
 		} 
-		else if (this.player.p.getY() < this.yCamera - h) {
-			this.yCamera = this.player.p.getY() + h;
+		else if (this.player.getP().getY() < this.yCamera - h) {
+			this.yCamera = this.player.getP().getY() + h;
 		}
 	}
 	

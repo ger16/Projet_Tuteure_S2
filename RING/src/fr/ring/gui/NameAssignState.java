@@ -51,7 +51,6 @@ public class NameAssignState extends BasicGameState{
 			catch(SlickException e){
 				e.getMessage();
 			}
-			System.out.println(MapGameState.p.getNom());
 			game.enterState(MapGameState.ID);				
 		}
 		
@@ -60,11 +59,10 @@ public class NameAssignState extends BasicGameState{
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.white);
+		g.setColor(Color.white);
 		background.draw(0, 0, container.getWidth(), container.getHeight());
 		g.drawString("Entrez le nom de votre personnage", enterName.getX() - MainScreenGameState.X_PADDING * 5, enterName.getY() - SPACE);
-		enterName.render(container, g);
-		g.setColor(Color.black);
+		enterName.render(this.container, g);
 	}
 
 	@Override

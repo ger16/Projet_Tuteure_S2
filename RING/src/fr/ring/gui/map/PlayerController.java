@@ -9,7 +9,7 @@ import fr.ring.gui.MainScreenGameState;
 public class PlayerController implements KeyListener {
 	
 	private Player player;
-	StateBasedGame game;
+	private StateBasedGame game;
 	
 	public PlayerController(Player player, StateBasedGame game) {
 		this.player = player;
@@ -21,20 +21,20 @@ public class PlayerController implements KeyListener {
 	public void keyPressed(int key, char c) {
 		switch (key) {
 		case Input.KEY_UP:
-			this.player.p.setDirection(0);
-		    this.player.p.setMoving(true);
+			this.player.getP().setDirection(0);
+		    this.player.getP().setMoving(true);
 		    break;
 		case Input.KEY_LEFT:
-		    this.player.p.setDirection(1);
-		    this.player.p.setMoving(true);
+		    this.player.getP().setDirection(1);
+		    this.player.getP().setMoving(true);
 		    break;
 		case Input.KEY_DOWN:
-		    this.player.p.setDirection(2);
-		    this.player.p.setMoving(true);
+		    this.player.getP().setDirection(2);
+		    this.player.getP().setMoving(true);
 		    break;
 		case Input.KEY_RIGHT:
-			this.player.p.setDirection(3);
-		    this.player.p.setMoving(true);
+			this.player.getP().setDirection(3);
+		    this.player.getP().setMoving(true);
 		    break;
 		case Input.KEY_ESCAPE:
 			game.enterState(MainScreenGameState.ID);
@@ -44,7 +44,7 @@ public class PlayerController implements KeyListener {
 
 	@Override
 	public void keyReleased(int key, char c) {
-		this.player.p.setMoving(false);
+		this.player.getP().setMoving(false);
 	}
 
 

@@ -33,6 +33,7 @@ public class MapGameState extends BasicGameState{
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
+		g.setBackground(Color.black);
 		camera.place(container, g);
 		map.renderBackground();
 		player.render(g);

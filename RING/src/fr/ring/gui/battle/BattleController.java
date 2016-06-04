@@ -320,7 +320,7 @@ public class BattleController implements InputProviderListener{
 		}
 		hud.addLog("Quelle compétence choississez vous ?");
 		for(int i=0; i<capButton.size(); i++){
-			hud.addLog((i + 1) + " : " + capButton.get(i).getNom());
+			hud.addLog("F" + (i + 1) + " : " + capButton.get(i).getNom());
 		}
 	}	
 

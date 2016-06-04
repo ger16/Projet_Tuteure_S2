@@ -20,10 +20,6 @@ public class Guerrier extends Personnage {
 	 * 			30-20-20-10
 	 */
 	
-	
-	// COnstructeur a choisir lequel est le  mieux
-	
-	//par defaut en respectant le minimum de condition
 	public static final int MAINS = 6, TORSE_EPAULE = 7, BOUCLIER = 8;
 	
 	private Animation[] animationsMain = new Animation[8];

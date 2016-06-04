@@ -20,6 +20,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 	public static final int	ADD_FORCE = 0, ADD_DEX = 1, ADD_INT = 2, ADD_CON = 3, REM_FORCE = 4, REM_DEX = 5, REM_INT = 6, REM_CON = 7, TERMINER = 8;
 	public static final int SPACE = 50;
 	public static final int Y_PADDING = 3, X_PADDING  = 7;
+	public static int SKILL_LVL_MAX = 80;
 	
 	
 	private StateBasedGame game;
@@ -74,6 +75,13 @@ public class SkillAssignmentGameState extends BasicGameState {
 	
 	public int getYCentre(GameContainer container, Image buttonImage){
 		return container.getHeight() / 2 - buttonImage.getHeight() / 2;
+	}
+	
+	public boolean islvlMax(){
+		if(MapGameState.p.getFOR() + MapGameState.p.getDEX() + MapGameState.p.getINT() + MapGameState.p.getCON() >= SKILL_LVL_MAX){
+			return true;
+		}
+		return false;
 	}
 	
 	class ButtonListener implements ComponentListener{
