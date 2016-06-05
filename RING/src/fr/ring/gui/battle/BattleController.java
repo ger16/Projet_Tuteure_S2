@@ -231,6 +231,15 @@ public class BattleController implements InputProviderListener{
 			game.enterState(MapGameState.ID);break;
 		default: break;
 		}
+		if(p.isDead()){
+			if(p.equals(player)){
+				game.enterState(GameOverGameState.ID);
+			}
+			else{
+				p.setVITMax();
+				game.enterState(VictoryGameState.ID);
+			}
+		}
 	}
 
 	@Override
