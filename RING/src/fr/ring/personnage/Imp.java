@@ -83,4 +83,7 @@ public class Imp extends IA{
 	@Override
 	public void initWalkCycle() throws SlickException {}
 
+	@Override
+	public void renderWalkCycle(Graphics g) throws SlickException {	}
+
 }

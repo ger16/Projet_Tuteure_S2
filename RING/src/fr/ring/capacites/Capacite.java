@@ -42,6 +42,27 @@ public abstract class Capacite{
 		return false;
 	}
 	
+	public Capacite getCap(String name){
+		Capacite c;
+		if(name == "Epee")
+			c = new Epee();
+		else if(name == "Ecu")
+			c = new Ecu();
+		else if(name == "Boule de feu")
+			c =  new BouleDeFeu();
+		else if(name == "Potion de soins mineure")
+			c = new PotionSoinsMineure();
+		else if(name == "Arc")
+			c = new Arc();
+		else if(name == "Protect")
+			c = new Protect();
+		else if(name == "Touche guerrisseur")
+			c = new ToucheGuerrisseur();
+		else
+			c = new Arme();
+			return c;
+	}
+	
 	public double getPBA() {
 		return PBA;
 	}

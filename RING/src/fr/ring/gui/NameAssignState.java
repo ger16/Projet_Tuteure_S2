@@ -44,6 +44,7 @@ public class NameAssignState extends BasicGameState{
 
 		@Override
 		public void componentActivated(AbstractComponent arg0) {
+			enterName.setAcceptingInput(false);
 			MapGameState.p.setNom(enterName.getText());
 			try{
 				game.getState(MapGameState.ID).init(container, game);
@@ -61,7 +62,7 @@ public class NameAssignState extends BasicGameState{
 			throws SlickException {
 		g.setColor(Color.white);
 		background.draw(0, 0, container.getWidth(), container.getHeight());
-		g.drawString("Entrez le nom de votre personnage", enterName.getX() - MainScreenGameState.X_PADDING * 5, enterName.getY() - SPACE);
+		g.drawString("Entrez le nom de votre personnage puis appuyez sur la touche ENTREE", enterName.getX() - MainScreenGameState.X_PADDING * 15, enterName.getY() - SPACE);
 		enterName.render(this.container, g);
 	}
 

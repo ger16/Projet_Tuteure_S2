@@ -20,7 +20,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 	public static final int	ADD_FORCE = 0, ADD_DEX = 1, ADD_INT = 2, ADD_CON = 3, REM_FORCE = 4, REM_DEX = 5, REM_INT = 6, REM_CON = 7, TERMINER = 8;
 	public static final int SPACE = 50;
 	public static final int Y_PADDING = 3, X_PADDING  = 7;
-	public static int SKILL_LVL_MAX = 80;
+	public static int SKILL_LVL_MAX = 90 + 10 * MapGameState.p.getEXP();
 	
 	
 	private StateBasedGame game;
@@ -64,7 +64,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 		this.plusIntelligenceButton = new MouseOverArea(container, buttonImage2, getXCentre(container, buttonImage2) + SPACE * 2, getYCentre(container, buttonImage2) + SPACE * 2, new ButtonListener(ADD_INT));
  		this.moinsConcentrationButton = new MouseOverArea(container, buttonImage2, getXCentre(container, buttonImage2) - SPACE * 2, getYCentre(container, buttonImage2) + SPACE * 3, new ButtonListener(REM_CON));
 		this.plusConcentrationButton = new MouseOverArea(container, buttonImage2, getXCentre(container, buttonImage2) + SPACE * 2, getYCentre(container, buttonImage2) + SPACE * 3, new ButtonListener(ADD_CON));
-		this.terminerButton = new MouseOverArea(container, buttonImage, getXCentre(container, buttonImage), getYCentre(container, buttonImage) + SPACE * 6, new ButtonListener(TERMINER));
+		this.terminerButton = new MouseOverArea(container, buttonImage, getXCentre(container, buttonImage), getYCentre(container, buttonImage) + SPACE * 5, new ButtonListener(TERMINER));
 				
 		
 	}
@@ -95,19 +95,19 @@ public class SkillAssignmentGameState extends BasicGameState {
 		public void componentActivated(AbstractComponent arg0) {
 			switch(val){
 			case ADD_FORCE : 
-				if(MapGameState.p.evolutionFOR())
+				if(MapGameState.p.evolutionFOR() && !islvlMax())
 					MapGameState.p.setFOR(MapGameState.p.getFOR() + 1);
 				break;
 			case ADD_DEX :	
-				if(MapGameState.p.evolutionDEX())
+				if(MapGameState.p.evolutionDEX()&& !islvlMax())
 					MapGameState.p.setDEX(MapGameState.p.getDEX() + 1);
 				break;
 			case ADD_INT : 
-				if(MapGameState.p.evolutionINT())
+				if(MapGameState.p.evolutionINT()&& !islvlMax())
 					MapGameState.p.setINT(MapGameState.p.getINT() + 1);
 				break;
 			case ADD_CON :
-				if(MapGameState.p.evolutionCON())
+				if(MapGameState.p.evolutionCON()&& !islvlMax())
 					MapGameState.p.setCON(MapGameState.p.getCON() + 1);
 				break;
 			case REM_FORCE :
@@ -134,7 +134,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 			throws SlickException {
 		g.setColor(Color.white); 
 		background.draw(0, 0, container.getWidth(), container.getHeight());
-		g.drawString("Attribuez vos points de compétences :", (container.getWidth() / 2) - X_PADDING * 20, (container.getHeight() / 2) - SPACE * 2);
+		g.drawString("Il vous reste " + (SKILL_LVL_MAX - (MapGameState.p.getFOR() + MapGameState.p.getDEX() + MapGameState.p.getINT() + MapGameState.p.getCON())) + " points de competence à attribuer : ", (container.getWidth() / 2) - X_PADDING * 20, (container.getHeight() / 2) - SPACE * 2);
 		g.setColor(Color.black);
 		forceButton.render(container, g);
 		g.drawString("For = " + MapGameState.p.getFOR(), forceButton.getX() + X_PADDING * 2, forceButton.getY() + Y_PADDING);
@@ -160,8 +160,10 @@ public class SkillAssignmentGameState extends BasicGameState {
 		g.drawString("-", moinsConcentrationButton.getX() + X_PADDING, moinsConcentrationButton.getY() + Y_PADDING);
 		plusConcentrationButton.render(container, g);
 		g.drawString("+", plusConcentrationButton.getX() + X_PADDING, plusConcentrationButton.getY() + Y_PADDING);
-		terminerButton.render(container, g);
-		g.drawString("Terminer", terminerButton.getX() + X_PADDING * 2, terminerButton.getY() + Y_PADDING);
+		if(islvlMax()){
+			terminerButton.render(container, g);
+			g.drawString("Terminer", terminerButton.getX() + X_PADDING * 2, terminerButton.getY() + Y_PADDING);
+		}
 	}
 
 	@Override
