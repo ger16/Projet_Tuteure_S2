@@ -23,11 +23,10 @@ import fr.ring.personnage.*;
 
 public class BattleController implements InputProviderListener{
 	
-	public static final int DEFENSE_IMMEDIATE = 0, DEFENSE_CALCULEE = 1, DEFENSE_ENCAISSE = 2;
 	public static int nbTours = 0;
 	public static ArrayList<Capacite> capButton = new ArrayList<Capacite>();
-	public static BattleHud hud;
 	
+	private BattleHud hud;	
 	private double atk = 0;
 	private Capacite capAtk;
 	private BattlePlayer player;
@@ -181,15 +180,11 @@ public class BattleController implements InputProviderListener{
 			p = joueurActif();
 			System.out.println(p.getNom());
 		}
-		/*if(p.equals(ennemy.getP())){
-			BattleGameState.provider.setActive(false);
-		}*/
 		switch ((BattleCommand) command){
 		case ATTACK:
 			if(p instanceof IA){
 				atk = resolutionAttaque(p, p.getCAP().get(0));
 				capAtk = p.getCAP().get(0);
-				hud.addLog(p.getNom() + " vous a attaque !");
 			}
 			else{
 				BattleGameState.provider.setActive(false);
@@ -374,9 +369,15 @@ public class BattleController implements InputProviderListener{
 		if(c.attaquer(p))
 			EFF = c.efficaciteAttaque(p);
 	    if(EFF != 0)
-	    	BattleController.hud.addLog("Degats de votre attaque : " + EFF);
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " vous a attaque !");
+	    	else
+	    		hud.addLog("Degats de votre attaque : " + EFF);
 	    else
-	    	BattleController.hud.addLog("Vous n'avez pas réussi votre attaque");
+	    	if (p instanceof IA)
+	    		hud.addLog(p.getNom() + " n'a pas reussi son attaque");
+	    	else
+	    		hud.addLog("Vous n'avez pas réussi votre attaque");
 		return EFF;		
 	}
 	
@@ -389,9 +390,15 @@ public class BattleController implements InputProviderListener{
 			EFF -= EFF/4;
 		}
 	    if(EFF != 0)
-	    	BattleController.hud.addLog("Degats de votre attaque : " + EFF);
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " vous a attaque !");
+	    	else
+	    		hud.addLog("Degats de votre attaque : " + EFF);
 	    else
-	    	BattleController.hud.addLog("Vous n'avez pas réussi votre attaque");
+	    	if (p instanceof IA)
+	    		hud.addLog(p.getNom() + " n'a pas reussi son attaque");
+	    	else
+	    		hud.addLog("Vous n'avez pas reussi votre attaque");
 		return EFF;
 	}
 	
@@ -403,10 +410,16 @@ public class BattleController implements InputProviderListener{
 			player.getP().setVIT(player.getP().getVIT() - (EFF_A - EFF_D));
 		else
 			ennemy.getP().setVIT(ennemy.getP().getVIT() - (EFF_A - EFF_D));
-	    if(EFF_D != 0)
+	    if(EFF_D != 0){
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " se defend");
 	    	hud.addLog("Nombre de PV absorbés : " + EFF_D);
+	    }
 	    else
-	    	hud.addLog("Vous n'avez pas réussi votre défense");
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " n'a pas reussi sa defense");
+	    	else
+	    		hud.addLog("Vous n'avez pas reussi votre defense");
 		return EFF_D;
 	}
 	
@@ -422,10 +435,16 @@ public class BattleController implements InputProviderListener{
 			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
 		else
 			this.player.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
-	    if(EFF_D != 0)
+	    if(EFF_D != 0){
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " se defend");
 	    	hud.addLog("Nombre de PV absorbés : " + EFF_D);
+	    }
 	    else
-	    	hud.addLog("Vous n'avez pas réussi votre défense");
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " n'a pas reussi sa defense");
+	    	else
+	    		hud.addLog("Vous n'avez pas reussi votre defense");
 		return EFF_D;
 	}
 	
@@ -437,10 +456,16 @@ public class BattleController implements InputProviderListener{
 			if(p.getVIT() > p.getVITMax())
 				p.setVITMax();
 		} 
-	    if(EFF != 0)
-	    	hud.addLog("Nombre de PV regagnés : " + EFF);
+	    if(EFF != 0){
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " se soigne");
+	    	hud.addLog("Nombre de PV regagnes : " + EFF);
+	    }
 	    else
-	    	hud.addLog("Vous n'avez pas réussi votre soin");
+	    	if(p instanceof IA)
+	    		hud.addLog(p.getNom() + " n'a pas reussi son soin");
+	    	else
+	    		hud.addLog("Vous n'avez pas réussi votre soin");
 		return EFF;
 	}
 	

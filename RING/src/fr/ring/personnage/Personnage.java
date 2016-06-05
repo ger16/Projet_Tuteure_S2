@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -144,6 +145,7 @@ public abstract class Personnage {
 	}
 	
 	public abstract void initWalkCycle() throws SlickException;
+	public abstract void renderWalkCycle(Graphics g) throws SlickException;
 
 	public abstract boolean evolutionFOR();
 	public abstract boolean evolutionDEX();
@@ -209,14 +211,14 @@ public abstract class Personnage {
 			if (type.equals("Chasseur"))
 				return new Mage (nom,For,Dex,Int,Con);
 			
-			} catch (Exception e) {
+		} catch (Exception e) {
 				System.out.println("Erreur de chargement"+e);
 				}
-			return null;
-		}
+		return null;
+	}
 	
 	
-}
+
 
 	public float getX() {
 		return x;

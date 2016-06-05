@@ -16,7 +16,7 @@ public class TestCapacite {
 		System.out.println(a.efficaciteAttaque(c));
 		System.out.println(a.containInterfaces("Attaque"));
 		System.out.println(a.containInterfaces("Defense"));
-		System.out.println(a.containInterfaces("Soin"));	
+		System.out.println(a.containInterfaces("Soin"));
 	}
 
 }
