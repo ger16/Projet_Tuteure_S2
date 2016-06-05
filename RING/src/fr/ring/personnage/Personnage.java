@@ -31,6 +31,7 @@ public abstract class Personnage {
 	private int direction = 0;
 	private boolean moving = false;
 	protected SpriteSheet [] spriteSheet;
+	
 	private Animation[] animationsTete = new Animation[8];
 	private Animation[] animationsCeinture = new Animation[8];
 	private Animation[] animationsTorse = new Animation[8];
@@ -168,8 +169,7 @@ public abstract class Personnage {
 	public void sauvergarderHero(Personnage p){
 
 		try{
-			File r = new File("Sauvergarde");
-			File f = new File(r,""+getNom()+".txt");
+			File f = new File(new File("Sauvegarde"),getNom()+".txt");
 			PrintWriter w = new PrintWriter(f);
 			if (p instanceof Mage)
 				w.println("Mage");
@@ -182,17 +182,18 @@ public abstract class Personnage {
 			w.println(getDEX());
 			w.println(getINT());
 			w.println(getCON());
-			System.out.println("Sauvergarde reussi théoriquement");
+			
+			System.out.println("Sauvergarde reussi");
 			w.close();}
 		catch(Exception e){ 
-			System.out.println("Fichier non trouvé");
+			System.out.println("Fichier non trouve");
 		}
 	}
 
-	public Personnage chargerHero(){
+	public Personnage chargerHero(String nom){
 		try{
-			File r = new File("Sauvergarde");
-			File f = new File(r,""+nom+".txt");
+	
+			File f = new File(new File ("Sauvegarde"),nom+".txt");
 			Scanner sc = new Scanner(f);
 				
 			String type = sc.nextLine();
@@ -203,20 +204,17 @@ public abstract class Personnage {
 			sc.close();
 
 			if (type.equals("Mage"))
-				return new Mage (nom,For,Dex,Int,Con);
+				return new Mage (nom,For,Dex,Int,Con, CAP);
 			if (type.equals("Guerrier"))
-				return new Mage (nom,For,Dex,Int,Con);
+				return new Mage (nom,For,Dex,Int,Con,CAP);
 			if (type.equals("Chasseur"))
-				return new Mage (nom,For,Dex,Int,Con);
+				return new Mage (nom,For,Dex,Int,Con,CAP);
 			
 			} catch (Exception e) {
 				System.out.println("Erreur de chargement"+e);
 				}
 			return null;
 		}
-	
-	
-}
 
 	public float getX() {
 		return x;
