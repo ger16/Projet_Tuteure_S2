@@ -13,6 +13,7 @@ public class TestSauvegarde {
 		p.sauvergarderHero(p);
 		String s = p.toString();
 		System.out.println(s);	
+		System.out.println(""+p.getClass().getSimpleName());
 		
 		
 		System.out.println("Debut: Chargement de compétence");
@@ -32,8 +33,7 @@ public class TestSauvegarde {
 		
 		p=p.chargerHero(nom);
 		System.out.println("Charegement fin");
-		s=p.toString();
-		System.out.println(s);
+		
 	}
 
 }

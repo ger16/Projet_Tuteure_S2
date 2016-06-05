@@ -10,9 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
-import fr.ring.capacites.Capacite;
-import fr.ring.capacites.Epee;
-import fr.ring.capacites.ToucheGuerrisseur;
+import fr.ring.capacites.*;
 
 public abstract class Personnage {
 	public static final int TETE = 0, CEINTURE = 1, TORSE = 2, JAMBES = 3, PIEDS = 4 ,CORPS = 5;
@@ -24,7 +22,7 @@ public abstract class Personnage {
 	private int INT; 	// Intelligence
 	private int CON; 	// Concentration
 	
-	private double VIT; 	// Vitalite
+	private double VIT;// Vitalite
 	private int EXP;	// Experience
 	private ArrayList<Capacite> CAP;
 	
@@ -53,9 +51,7 @@ public abstract class Personnage {
 		EXP = 1;
 		CAP = cAP;
 		cAP.add(new Epee());
-		cAP.get(0).setNom("Escalibure");
 		cAP.add(new ToucheGuerrisseur());
-		cAP.get(1).setNom("Soin");
 		}
 	
 	public Personnage( Personnage hero){
@@ -179,11 +175,13 @@ public abstract class Personnage {
 				w.println("Chasseur");
 			if (p instanceof Guerrier)
 				w.println("Guerrier");
-		
 			w.println(getFOR());
 			w.println(getDEX());
 			w.println(getINT());
 			w.println(getCON());
+			for(int i = 0; i<CAP.size();i++){
+				w.println(CAP.get(i).getClass().getSimpleName());
+			}
 			
 			System.out.println("Sauvergarde reussi");
 			w.close();}
@@ -196,13 +194,18 @@ public abstract class Personnage {
 		try{
 	
 			File f = new File(new File ("Sauvegarde"),nom+".txt");
-			Scanner sc = new Scanner(f);
-				
+			Scanner sc = new Scanner(f);		
 			String type = sc.nextLine();
 			int For= Integer.parseInt(sc.nextLine());
 			int Dex= Integer.parseInt(sc.nextLine());
 			int Int= Integer.parseInt(sc.nextLine());
 			int Con= Integer.parseInt(sc.nextLine());
+			
+			for(int i = 0; i<CAP.size();i++){
+				String cap = sc.nextLine();
+				System.out.println(cap);
+				CAP.add(i,Capacite.getCapA(cap));
+			}
 			sc.close();
 
 			if (type.equals("Mage"))
@@ -214,18 +217,9 @@ public abstract class Personnage {
 			
 		} catch (Exception e) {
 				System.out.println("Erreur de chargement"+e);
-				}
-<<<<<<< HEAD
-			return null;
 		}
-=======
 		return null;
 	}
-	
-	
-
->>>>>>> branch 'testGerry' of https://github.com/ger16/Projet_Tuteure_S2
-
 	public float getX() {
 		return x;
 	}
@@ -362,5 +356,12 @@ public abstract class Personnage {
 			return false;
 		return true;
 	}
+
+
+	public String cAP() {
+		return "Personnage [nom=" + nom + "CAP=" + CAP + "]";
+	}
+	
+	
 	
 }
