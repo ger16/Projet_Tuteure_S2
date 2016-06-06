@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.ring.gui.battle.BattleController.BattleCommand;
 import fr.ring.gui.battle.BattleController.CapController;
 import fr.ring.gui.map.MapGameState;
+import fr.ring.gui.map.TriggerController;
 import fr.ring.personnage.Imp;
 
 public class BattleGameState extends BasicGameState {
@@ -20,23 +21,25 @@ public class BattleGameState extends BasicGameState {
 	public static InputProvider provider;
 	public static InputProvider capProvider;
 	public static InputProvider defenseProvider;
-	private StateBasedGame game;
+	public static BattlePlayer player;
+	public static BattleEnnemy ennemy;
+	
 	private Image background;
 	private BattleHud battleHud;
-	private BattlePlayer player = new BattlePlayer(MapGameState.p);
-	private Imp i = new Imp();
-	private BattleEnnemy ennemy;
 	private BattleController controller;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		i.initBattle();
-		this.ennemy = new BattleEnnemy(i);
-		this.game = game;
 		background = new Image("fr/ring/gui/ressources/map/background/background2.png");
-		this.player.init();
-		this.ennemy.init();
+	}
+	
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		player = new BattlePlayer(MapGameState.p);
+		ennemy = new BattleEnnemy(TriggerController.boss);
+		player.init();
+		ennemy.init();
 	    controller = new BattleController(player, ennemy,container , game);
 	    provider = new InputProvider(container.getInput());
 	    capProvider = new InputProvider(container.getInput());
@@ -67,8 +70,8 @@ public class BattleGameState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		background.draw(0, 0, container.getWidth(), container.getHeight());
-		this.player.render(container, g);
-		this.ennemy.render(container, g);
+		BattleGameState.player.render(container, g);
+		BattleGameState.ennemy.render(container, g);
 		this.battleHud.render(container, g);
 	}
 
@@ -79,8 +82,6 @@ public class BattleGameState extends BasicGameState {
 
 	@Override
 	public int getID() {
-		
 		return this.ID;
 	}
-
 }

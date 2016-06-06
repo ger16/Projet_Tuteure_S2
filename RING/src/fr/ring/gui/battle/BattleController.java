@@ -126,38 +126,23 @@ public class BattleController implements InputProviderListener{
 
 		@Override
 		public void controlPressed(Command command) {
-			IA ia = (IA) ennemy.getP();
-			switch((CapCommand) command){
-			case CAP_1:
-				capControlPressedAction(p, ia,  bc, 0);
-				break;
-			case CAP_2:
-				capControlPressedAction(p, ia,  bc, 1);
-				break;
-			case CAP_3:
-				capControlPressedAction(p, ia,  bc, 2);
-				break;
-			case CAP_4:
-				capControlPressedAction(p, ia,  bc, 3);
-				break;
-			case CAP_5:
-				capControlPressedAction(p, ia,  bc, 4);
-				break;
-			case CAP_6:
-				capControlPressedAction(p, ia,  bc, 5);
-				break;
-			case CAP_7:
-				capControlPressedAction(p, ia,  bc, 6);
-				break;
-			case CAP_8:
-				capControlPressedAction(p, ia,  bc, 7);
-				break;
-			case CAP_9:
-				capControlPressedAction(p, ia,  bc, 8);
-				break;
-			case CAP_10:
-				capControlPressedAction(p, ia,  bc, 9);
-				break;
+			try{	
+				IA ia = (IA) ennemy.getP();
+				switch((CapCommand) command){
+				case CAP_1:capControlPressedAction(p, ia,  bc, 0);break;
+				case CAP_2:capControlPressedAction(p, ia,  bc, 1);break;
+				case CAP_3:capControlPressedAction(p, ia,  bc, 2);break;
+				case CAP_4:capControlPressedAction(p, ia,  bc, 3);break;
+				case CAP_5:capControlPressedAction(p, ia,  bc, 4);break;
+				case CAP_6:capControlPressedAction(p, ia,  bc, 5);break;
+				case CAP_7:capControlPressedAction(p, ia,  bc, 6);break;
+				case CAP_8:capControlPressedAction(p, ia,  bc, 7);break;
+				case CAP_9:capControlPressedAction(p, ia,  bc, 8);break;
+				case CAP_10:capControlPressedAction(p, ia,  bc, 9);break;
+				}
+			}
+			catch(IndexOutOfBoundsException | NullPointerException e){
+				e.printStackTrace();
 			}
 		}
 
@@ -228,15 +213,25 @@ public class BattleController implements InputProviderListener{
 			}
 			break;
 		case SURRENDER:
+			MapGameState.p = player.getP();
+			try {
+				game.getState(GameOverGameState.ID).init(container, game);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
 			game.enterState(MapGameState.ID);break;
 		default: break;
 		}
+		if(p.equals(player.getP()))
+			MapGameState.p = p;
 		if(p.isDead()){
 			if(p.equals(player)){
+				MapGameState.p = player.getP();
 				game.enterState(GameOverGameState.ID);
 			}
 			else{
 				p.setVITMax();
+				MapGameState.p = player.getP();
 				game.enterState(VictoryGameState.ID);
 			}
 		}
@@ -313,16 +308,7 @@ public class BattleController implements InputProviderListener{
 			}
 			break;
 		}
-		for(int i=0; i<p.getCAP().size(); i++){
-			System.out.println(p.getCAP().get(i).getNom());
-		}
-		for(int i=0; i<capButton.size(); i++){
-			System.out.println((i + 1) + " : " + capButton.get(i).getNom());
-		}
-		if(capButton.isEmpty()){
-			System.out.println("Tu es un connard");
-		}
-		hud.addLog("Quelle compétence choississez vous ?");
+		hud.addLog("Quelle competence choississez vous ?");
 		for(int i=0; i<capButton.size(); i++){
 			hud.addLog("F" + (i + 1) + " : " + capButton.get(i).getNom());
 		}

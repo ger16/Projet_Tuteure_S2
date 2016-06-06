@@ -3,6 +3,7 @@ package fr.ring.capacites;
 public class Ecu extends Bouclier {
 	
 	public static final int PRO_ECU = 70, MAN_ECU = 30;
+	public static final String NOM_ECU = "Ecu";
 	
 	public Ecu() {
 		this.nom = "Ecu";

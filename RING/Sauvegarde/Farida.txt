@@ -1,7 +1,0 @@
-Chasseur
-20
-20
-20
-20
-Epee
-ToucheGuerrisseur

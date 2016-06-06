@@ -61,15 +61,15 @@ public class CreateCharacterGameState extends BasicGameState {
 			case GUERRIER :
 				p = new Guerrier();
 				MapGameState.p = p;
-				game.enterState(SkillAssignmentGameState.ID);break;
+				game.enterState(NameAssignState.ID);break;
 			case MAGE : 
 				p = new Mage();
 				MapGameState.p = p;
-				game.enterState(SkillAssignmentGameState.ID);break;
+				game.enterState(NameAssignState.ID);break;
 			case CHASSEUR :
 				p = new Chasseur();
 				MapGameState.p = p;
-				game.enterState(SkillAssignmentGameState.ID);break;
+				game.enterState(NameAssignState.ID);break;
 			}
 		}
 	}

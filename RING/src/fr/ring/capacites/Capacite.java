@@ -43,19 +43,19 @@ public abstract class Capacite{
 	}
 	
 	public static Capacite getCapA(String name){
-		if(name.equals("Epee"))
+		if(name.equals(Epee.NOM_EPEE))
 			return new Epee();
-		else if(name.equals("Arc"))
+		else if(name.equals(Arc.NOM_ARC))
 			return new Arc();
-		else if(name.equals("Ecu"))
+		else if(name.equals(Ecu.NOM_ECU))
 			return new Ecu();
-		else if(name.equals("BouleDeFeu"))
+		else if(name.equals(BouleDeFeu.NOM_BOULE_DE_FEU))
 			return new BouleDeFeu();
-		else if(name.equals("PotionSoinsMineure"))
+		else if(name.equals(PotionSoinsMineure.NOM_POTION_SOINS_MINEURE))
 			return new PotionSoinsMineure();
-		else if(name.equals("Protect"))
+		else if(name.equals(Protect.NOM_PROTECT))
 			return new Protect();
-		else if(name.equals("ToucheGuerrisseur"))
+		else if(name.equals(ToucheGuerrisseur.NOM_TOUCHE_GUERRISSEUR))
 			return new ToucheGuerrisseur();
 		return null;
 	}

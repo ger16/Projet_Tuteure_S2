@@ -1,0 +1,10 @@
+Mage
+12
+13
+40
+35
+1
+300.0
+300.0
+BouleDeFeu
+Protect

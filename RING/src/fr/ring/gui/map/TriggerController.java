@@ -1,11 +1,18 @@
 package fr.ring.gui.map;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.ring.gui.battle.BattleGameState;
+import fr.ring.personnage.IA;
+import fr.ring.personnage.Imp;
+import fr.ring.capacites.*;
 
 public class TriggerController {
+	
+	public static IA boss;
 	
 	private Map map;
 	private Player player;
@@ -20,7 +27,33 @@ public class TriggerController {
 	public void update() throws SlickException {
 		for(int objectID = 0; objectID < map.getObjectCount(); objectID++){
 			if(isInTrigger(objectID)){
-				if("teleport".equals(map.getObjectType(objectID))){
+				if("boss1".equals(map.getObjectType(objectID))){
+					boss = new Imp("Imp1", 30,20,15,15, new ArrayList<Capacite>());
+					boss.initBattle();
+					game.enterState(BattleGameState.ID);
+				}
+				else if("boss2".equals(map.getObjectType(objectID))){
+					boss = new Imp("Imp2", 32,22,16,16, new ArrayList<Capacite>());
+					boss.initBattle();
+					boss.setEXP(3);
+					game.enterState(BattleGameState.ID);
+				}
+				else if("boss3".equals(map.getObjectType(objectID))){
+					boss = new Imp("Imp3", 34,24,16,16, new ArrayList<Capacite>());
+					boss.initBattle();
+					boss.setEXP(5);
+					game.enterState(BattleGameState.ID);
+				}
+				else if("boss4".equals(map.getObjectType(objectID))){
+					boss = new Imp("Imp4", 38,24,16,16, new ArrayList<Capacite>());
+					boss.initBattle();
+					boss.setEXP(7);
+					game.enterState(BattleGameState.ID);
+				}
+				else if("boss5".equals(map.getObjectType(objectID))){
+					boss = new Imp("Imp5", 40,26,17,17, new ArrayList<Capacite>());
+					boss.initBattle();
+					boss.setEXP(9);
 					game.enterState(BattleGameState.ID);
 				}
 				else if("heal".equals(map.getObjectType(objectID))){

@@ -8,15 +8,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+import fr.ring.capacites.Arc;
 import fr.ring.capacites.Capacite;
+import fr.ring.capacites.ToucheGuerrisseur;
 
 public class Chasseur extends Personnage {
-	/*
-	 * Caracteristique:
-	 * 			FORCE 	>= 20
-	 * 			DEX 	>= 20
-	 * 			INT		>= 20
-	 */
+
 	public static final int  BRACELETS = 6, SHIRT = 7, EPAULES = 8, CARQUOIS = 9;
 	
 	private Animation[] animationsBracelets = new Animation[8];
@@ -25,11 +22,13 @@ public class Chasseur extends Personnage {
 	private Animation[] animationsCarquois = new Animation[8];
 	
 	public Chasseur() {
-		super("Farida",  20, 20, 20, 20, new ArrayList<Capacite>());
+		super("",  20, 20, 20, 20, new ArrayList<Capacite>());
+		getCAP().add(new Arc());
+		getCAP().add(new ToucheGuerrisseur());
 	}
 	
-	public Chasseur(String nom, int FOR, int DEX, int INT, int CON, ArrayList<Capacite> CAP){
-		super(nom, FOR, DEX, INT, CON, CAP);
+	public Chasseur(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, int eXP, float x, float y){
+		super(nom, fOR, dEX, iNT, cON, cAP, eXP, x, y);
 		
 	}
 	
@@ -73,6 +72,21 @@ public class Chasseur extends Personnage {
 		spriteSheet[8] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/TORSO_leather_armor_shoulders.png", 64, 64);
 		spriteSheet[9] = new SpriteSheet("fr/ring/gui/ressources/characters/walkcycle/BEHIND_quiver.png", 64, 64);
 		this.initSpriteSheet();
+	}
+	
+	public void initBattle() throws SlickException {
+		battleSpriteSheet = new SpriteSheet[11];
+		battleSpriteSheet[0] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/BODY_animation.png", 64, 64);
+		battleSpriteSheet[1] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/FEET_shoes_brown.png", 64, 64);
+		battleSpriteSheet[2] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/LEGS_pants_greenish.png", 64, 64);
+		battleSpriteSheet[3] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/TORSO_leather_armor_shirt_white.png", 64, 64);
+		battleSpriteSheet[4] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/TORSO_leather_armor_torso.png", 64, 64);
+		battleSpriteSheet[5] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/TORSO_leather_armor_bracers.png", 64, 64);
+		battleSpriteSheet[6] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/TORSO_leather_armor_shoulders.png", 64, 64);
+		battleSpriteSheet[7] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/HEAD_leather_armor_hat.png", 64, 64);
+		battleSpriteSheet[8] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/BELT_leather.png", 64, 64);
+		battleSpriteSheet[9] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/WEAPON_bow.png", 64, 64);
+		battleSpriteSheet[10] = new SpriteSheet("fr/ring/gui/ressources/characters/bow/WEAPON_arrow.png", 64, 64);
 	}
 	
 	public void renderWalkCycle(Graphics g) throws SlickException {

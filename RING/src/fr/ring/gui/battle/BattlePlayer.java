@@ -18,9 +18,10 @@ public class BattlePlayer {
 	}
 	
 	public void init () throws SlickException{
-		hero = new Image[8];
+		p.initBattle();
+		hero = new Image[p.getBattleSpriteSheet().length];
 		for(int i = 0; i<hero.length; i++){
-			hero[i] = p.getSpriteSheet()[i].getSubImage(0, 3).getScaledCopy(2);
+			hero[i] = p.getBattleSpriteSheet()[i].getSubImage(0, 3).getScaledCopy(2);
 		}		
 	}
 	
@@ -29,8 +30,8 @@ public class BattlePlayer {
 			hero[i].drawCentered(container.getWidth() * 1 / 4, container.getHeight() / 2);
 		}
 		Font font = g.getFont();
-		String pv = Integer.toString((int)p.getVIT());
-	    font.drawString(container.getWidth() * 1 / 4 - font.getWidth(pv) / 2, container.getHeight() / 2 - hero[0].getHeight() / 2 - font.getLineHeight(), pv, Color.white);
+		String infos = p.getNom() + " pv:" +  Integer.toString((int)p.getVIT()) + " lvl: " + Integer.toString(p.getEXP());
+	    font.drawString(container.getWidth() * 1 / 4 - font.getWidth(infos) / 2, container.getHeight() / 2 - hero[0].getHeight() / 2 - font.getLineHeight(),infos, Color.white);
 	
 	}
 

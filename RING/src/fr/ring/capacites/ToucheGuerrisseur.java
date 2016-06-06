@@ -3,9 +3,10 @@ package fr.ring.capacites;
 public class ToucheGuerrisseur extends SortSoin {
 	
 	public static final int PUI_TOUCHE_GUERRISSEUR = 60, FAC_TOUCHE_GUERRISSEUR = 40;
+	public static final String NOM_TOUCHE_GUERRISSEUR = "ToucheGuerrisseur";
 	
 	public ToucheGuerrisseur() {
-		this.nom = "Touche guerrisseur";
+		this.nom = NOM_TOUCHE_GUERRISSEUR;
 		this.PUI = PUI_TOUCHE_GUERRISSEUR;
 		this.FAC = FAC_TOUCHE_GUERRISSEUR;
 	}

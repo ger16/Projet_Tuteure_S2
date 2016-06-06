@@ -1,6 +1,8 @@
 package fr.ring.personnage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,19 +19,20 @@ public abstract class Personnage {
 	
 	private String nom;
 	
-	private int FOR; 	// Force
-	private int DEX; 	// Dexterite
-	private int INT; 	// Intelligence
-	private int CON; 	// Concentration
+	private int FOR; 
+	private int DEX; 	
+	private int INT; 
+	private int CON; 	
 	
-	private double VIT;// Vitalite
-	private int EXP;	// Experience
+	private double VIT;
+	private int EXP;	
 	private ArrayList<Capacite> CAP;
 	
 	protected float x = 300, y = 300;
 	private int direction = 0;
 	private boolean moving = false;
 	protected SpriteSheet [] spriteSheet;
+	protected SpriteSheet[] battleSpriteSheet;
 	
 	private Animation[] animationsTete = new Animation[8];
 	private Animation[] animationsCeinture = new Animation[8];
@@ -50,9 +53,19 @@ public abstract class Personnage {
 		setVITMax();
 		EXP = 1;
 		CAP = cAP;
-		cAP.add(new Epee());
-		cAP.add(new ToucheGuerrisseur());
-		}
+	}
+	
+	public Personnage(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, int eXP, float x, float y){
+		this.nom = nom;
+		FOR = fOR;
+		DEX = dEX;
+		INT = iNT;
+		CON = cON;
+		CAP = cAP;
+		EXP = eXP;
+		this.x = x;
+		this.y = y;
+	}
 	
 	public Personnage( Personnage hero){
 		this.nom = hero.getNom();
@@ -143,13 +156,12 @@ public abstract class Personnage {
 	
 	public abstract void initWalkCycle() throws SlickException;
 	public abstract void renderWalkCycle(Graphics g) throws SlickException;
+	public abstract void initBattle() throws SlickException;
 
 	public abstract boolean evolutionFOR();
 	public abstract boolean evolutionDEX();
 	public abstract boolean evolutionINT();
 	public abstract boolean evolutionCON();
-	
-
 	
 	public boolean isDead(){
 		if(this.VIT <= 0)
@@ -164,60 +176,58 @@ public abstract class Personnage {
 	    }
 	    return animation;
 	}
-	public void sauvergarderHero(Personnage p){
-
-		try{
-			File f = new File(new File("Sauvegarde"),getNom()+".txt");
-			PrintWriter w = new PrintWriter(f);
-			if (p instanceof Mage)
-				w.println("Mage");
-			if (p instanceof Chasseur)
-				w.println("Chasseur");
-			if (p instanceof Guerrier)
-				w.println("Guerrier");
-			w.println(getFOR());
-			w.println(getDEX());
-			w.println(getINT());
-			w.println(getCON());
-			for(int i = 0; i<CAP.size();i++){
-				w.println(CAP.get(i).getClass().getSimpleName());
-			}
-			
-			System.out.println("Sauvergarde reussi");
-			w.close();}
-		catch(Exception e){ 
-			System.out.println("Fichier non trouve");
+	public void sauvergarderHero() throws IOException{
+		File f = new File(new File("Sauvegarde"), nom + ".txt");
+		PrintWriter w = new PrintWriter(f);
+		if (this instanceof Mage)
+			w.println("Mage");
+		if (this instanceof Chasseur)
+			w.println("Chasseur");
+		if (this instanceof Guerrier)
+			w.println("Guerrier");
+		w.println(getFOR());
+		w.println(getDEX());
+		w.println(getINT());
+		w.println(getCON());
+		w.println(getEXP());
+		w.println(getX());
+		w.println(getY());
+		for(int i = 0; i<CAP.size();i++){
+			w.println(CAP.get(i).getClass().getSimpleName());
 		}
+		w.close();
+		System.out.println("Sauvegarde reussi");
+		System.out.println(f.getAbsolutePath());
+	}
+	
+	public void supprimerHero(){
+		File f = new File(new File("Sauvegarde"), nom + ".txt");
+		f.delete();
 	}
 
-	public Personnage chargerHero(String nom){
-		try{
-	
-			File f = new File(new File ("Sauvegarde"),nom+".txt");
-			Scanner sc = new Scanner(f);		
-			String type = sc.nextLine();
-			int For= Integer.parseInt(sc.nextLine());
-			int Dex= Integer.parseInt(sc.nextLine());
-			int Int= Integer.parseInt(sc.nextLine());
-			int Con= Integer.parseInt(sc.nextLine());
-			
-			for(int i = 0; i<CAP.size();i++){
-				String cap = sc.nextLine();
-				System.out.println(cap);
-				CAP.add(i,Capacite.getCapA(cap));
-			}
-			sc.close();
-
-			if (type.equals("Mage"))
-				return new Mage (nom,For,Dex,Int,Con, CAP);
-			if (type.equals("Guerrier"))
-				return new Mage (nom,For,Dex,Int,Con,CAP);
-			if (type.equals("Chasseur"))
-				return new Mage (nom,For,Dex,Int,Con,CAP);
-			
-		} catch (Exception e) {
-				System.out.println("Erreur de chargement"+e);
-		}
+	public static Personnage chargerHero(String nom) throws FileNotFoundException{
+		File f = new File(new File ("Sauvegarde"),nom+".txt");
+		Scanner sc = new Scanner(f);
+		ArrayList <Capacite> chargedCap = new ArrayList<Capacite>();
+		String type = sc.nextLine();
+		int fOR= Integer.parseInt(sc.nextLine());
+		int dEX= Integer.parseInt(sc.nextLine());
+		int iNT= Integer.parseInt(sc.nextLine());
+		int cON= Integer.parseInt(sc.nextLine());
+		int eXP= Integer.parseInt(sc.nextLine());
+		Float xL= Float.parseFloat(sc.nextLine());
+		Float yL= Float.parseFloat(sc.nextLine());
+		do{
+			chargedCap.add(Capacite.getCapA(sc.nextLine()));
+		}while(sc.hasNextLine());
+		sc.close();
+		
+		if (type.equals("Mage"))
+			return new Mage (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);
+		if (type.equals("Guerrier"))
+			return new Guerrier (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);
+		if (type.equals("Chasseur"))
+			return new Chasseur (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);	
 		return null;
 	}
 	public float getX() {
@@ -357,11 +367,19 @@ public abstract class Personnage {
 		return true;
 	}
 
-
-	public String cAP() {
-		return "Personnage [nom=" + nom + "CAP=" + CAP + "]";
+	@Override
+	public String toString() {
+		return "Personnage [nom=" + nom + ", FOR=" + FOR + ", DEX=" + DEX
+				+ ", INT=" + INT + ", CON=" + CON + ", VIT=" + VIT + ", EXP="
+				+ EXP + ", CAP=" + CAP + ", x=" + x + ", y=" + y + "]";
 	}
-	
-	
+
+	public SpriteSheet[] getBattleSpriteSheet() {
+		return battleSpriteSheet;
+	}
+
+	public void setBattleSpriteSheet(SpriteSheet[] battleSpriteSheet) {
+		this.battleSpriteSheet = battleSpriteSheet;
+	}
 	
 }

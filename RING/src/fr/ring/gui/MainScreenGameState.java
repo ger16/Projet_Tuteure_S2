@@ -11,6 +11,8 @@ import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.battle.GameOverGameState;
+import fr.ring.gui.battle.VictoryGameState;
 import fr.ring.gui.map.MapGameState;
 
 public class MainScreenGameState extends BasicGameState {
@@ -52,9 +54,9 @@ public class MainScreenGameState extends BasicGameState {
 		g.drawString("RING", (container.getWidth()/2) - X_PADDING * 3, (container.getHeight()/2) - SPACE * 3);
 		g.setColor(Color.black); 
 		jouerBoutton.render(container, g);
-		g.drawString("Jouer", jouerBoutton.getX() + X_PADDING, jouerBoutton.getY() + Y_PADDING);
+		g.drawString("Charger joueur", jouerBoutton.getX() + X_PADDING, jouerBoutton.getY() + Y_PADDING);
 		creerPersonnageBoutton.render(container, g);
-		g.drawString("Créer joueur", creerPersonnageBoutton.getX() + X_PADDING, creerPersonnageBoutton.getY() + Y_PADDING);
+		g.drawString("Creer joueur", creerPersonnageBoutton.getX() + X_PADDING, creerPersonnageBoutton.getY() + Y_PADDING);
 		quitterBoutton.render(container, g);
 		g.drawString("Quitter", quitterBoutton.getX() + X_PADDING, quitterBoutton.getY() + Y_PADDING);
 		
@@ -74,7 +76,7 @@ public class MainScreenGameState extends BasicGameState {
 		@Override
 		public void componentActivated(AbstractComponent arg0) {
 			switch(val){
-			case JOUER : game.enterState(MapGameState.ID);break;
+			case JOUER : game.enterState(LoadCharacterGameState.ID);break;
 			case CREER_PERSONNAGE : game.enterState(CreateCharacterGameState.ID);break;
 			case QUITTER : container.exit();break;
 			}

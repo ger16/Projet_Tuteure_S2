@@ -1,5 +1,7 @@
 package fr.ring.gui;
 
+import java.io.IOException;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -20,7 +22,7 @@ public class SkillAssignmentGameState extends BasicGameState {
 	public static final int	ADD_FORCE = 0, ADD_DEX = 1, ADD_INT = 2, ADD_CON = 3, REM_FORCE = 4, REM_DEX = 5, REM_INT = 6, REM_CON = 7, TERMINER = 8;
 	public static final int SPACE = 50;
 	public static final int Y_PADDING = 3, X_PADDING  = 7;
-	public static int SKILL_LVL_MAX = 90 + 10 * MapGameState.p.getEXP();
+	public static int SKILL_LVL_MAX = 100;
 	
 	
 	private StateBasedGame game;
@@ -86,6 +88,10 @@ public class SkillAssignmentGameState extends BasicGameState {
 	
 	class ButtonListener implements ComponentListener{
 		private int val;
+		private int OLD_FOR = MapGameState.p.getFOR(); 
+		private int OLD_DEX = MapGameState.p.getDEX();
+		private int OLD_INT = MapGameState.p.getINT();
+		private int OLD_CON = MapGameState.p.getCON();
 		
 		public ButtonListener(int val){
 			this.val = val;			
@@ -111,19 +117,32 @@ public class SkillAssignmentGameState extends BasicGameState {
 					MapGameState.p.setCON(MapGameState.p.getCON() + 1);
 				break;
 			case REM_FORCE :
-				MapGameState.p.setFOR(MapGameState.p.getFOR() - 1);
+				if(MapGameState.p.getFOR() - 1 >= OLD_FOR)	
+					MapGameState.p.setFOR(MapGameState.p.getFOR() - 1);
 				break;
 			case REM_DEX :
-				MapGameState.p.setDEX(MapGameState.p.getDEX() - 1);
+				if(MapGameState.p.getDEX() - 1 >= OLD_DEX)	
+					MapGameState.p.setDEX(MapGameState.p.getDEX() - 1);
 				break;
 			case REM_INT :
-				MapGameState.p.setINT(MapGameState.p.getINT() - 1);
+				if(MapGameState.p.getFOR() - 1 >= OLD_FOR)	
+					MapGameState.p.setINT(MapGameState.p.getINT() - 1);
 				break;
 			case REM_CON :
-				MapGameState.p.setCON(MapGameState.p.getCON() - 1);
+				if(MapGameState.p.getFOR() - 1 >= OLD_FOR)	
+					MapGameState.p.setCON(MapGameState.p.getCON() - 1);
 				break;
 			case TERMINER :
-				game.enterState(NameAssignState.ID);
+				OLD_FOR = MapGameState.p.getFOR(); 
+				OLD_DEX = MapGameState.p.getDEX();
+				OLD_INT = MapGameState.p.getINT();
+				OLD_CON = MapGameState.p.getCON();
+				try {
+					MapGameState.p.sauvergarderHero();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				game.enterState(MapGameState.ID);
 				break;
 			}
 		}

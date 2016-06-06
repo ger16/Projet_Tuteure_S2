@@ -1,24 +1,16 @@
 package fr.ring.personnage;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import fr.ring.capacites.Capacite;
+import fr.ring.capacites.Ecu;
+import fr.ring.capacites.Epee;
 
 public class Guerrier extends Personnage {
-	/*
-	 * Caracteristique:
-	 * 			FORCE 	=> 	DEX + 10
-	 * 			DEX		=>	INT
-	 * 			INT		=>	CON
-	 * 
-	 * 			30-20-20-10
-	 */
 	
 	public static final int MAINS = 6, TORSE_EPAULE = 7, BOUCLIER = 8;
 	
@@ -31,25 +23,22 @@ public class Guerrier extends Personnage {
 	private SpriteSheet [] battleSpriteSheetBouclier;
 	
 	public Guerrier() {
-			super("Farida",30 , 20, 20, 10, new ArrayList<Capacite>());
+			super("",30 , 20, 20, 10, new ArrayList<Capacite>());
+			getCAP().add(new Epee());
+			getCAP().add(new Ecu());
 	}
-	
-	//champs par champs
-	public Guerrier(String nom, int FOR, int DEX, int INT, int CON, ArrayList<Capacite> CAP){
-		super(nom, FOR, DEX, INT, CON, CAP);
+
+	public Guerrier(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, int eXP, float x, float y){
+		super(nom, fOR, dEX, iNT, cON, cAP, eXP, x, y);
 		
 	}
 
-	//Methode toString
 	public String toString() {
 		return "Classe du heros: Guerrier Nom: " + getNom() + ", Force: " + getFOR() + ", Dexeterite: " + getDEX() + ", Intelligence: "
 				+ getINT() + ", Concentration: " + getCON() + ", PV: " + getVIT() + ", Experience: " + getEXP();
 	}
-	
-// METHODE ATTRIBUTION DES POINTS DE COMPETENCES
-	
+		
 	public boolean evolutionFOR(){
-		// Force peut �tre augmenter tout le temps car 0 constriction
 		return true;
 	}
 	
@@ -90,16 +79,16 @@ public class Guerrier extends Personnage {
 	}
 	
 	public void initBattle() throws SlickException {
-		battleSpriteSheetEpee = new SpriteSheet[8];
-		battleSpriteSheetEpee[0] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/BODY_male.png", 64, 64);
-		battleSpriteSheetEpee[1] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/FEET_plate_armor_shoes.png", 64, 64);
-		battleSpriteSheetEpee[2] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/LEGS_plate_armor_pants.png", 64, 64);
-		battleSpriteSheetEpee[3] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/TORSO_plate_armor_torso.png", 64, 64);
-		battleSpriteSheetEpee[4] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/TORSO_plate_armor_arms_shoulders.png", 64, 64);
-		battleSpriteSheetEpee[5] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/HEAD_plate_armor_helmet.png", 64, 64);
-		battleSpriteSheetEpee[6] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/HANDS_plate_armor_gloves.png", 64, 64);
-		battleSpriteSheetEpee[7] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/WEAPON_dagger.png", 64, 64);
-		for(int i=0; i<battleSpriteSheetEpee.length; i++){		
+		battleSpriteSheet = new SpriteSheet[8];
+		battleSpriteSheet[0] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/BODY_human.png", 64, 64);
+		battleSpriteSheet[1] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/FEET_plate_armor_shoes.png", 64, 64);
+		battleSpriteSheet[2] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/LEGS_plate_armor_pants.png", 64, 64);
+		battleSpriteSheet[3] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/TORSO_plate_armor_torso.png", 64, 64);
+		battleSpriteSheet[4] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/TORSO_plate_armor_arms_shoulders.png", 64, 64);
+		battleSpriteSheet[5] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/HEAD_plate_armor_helmet.png", 64, 64);
+		battleSpriteSheet[6] = new SpriteSheet("fr/ring/gui/ressources/characters/thrust/HANDS_plate_armor_gloves.png", 64, 64);
+		battleSpriteSheet[7] = new SpriteSheet("fr/ring/gui/ressources/characters/slash/WEAPON_dagger.png", 64, 64);
+		/*for(int i=0; i<battleSpriteSheetEpee.length; i++){		
 			setAnimationAtk(loadAnimation(battleSpriteSheetEpee[i], 1, 5, 4), 0);
 			setAnimationAtk(loadAnimation(battleSpriteSheetEpee[i], 1, 5, 4), 1);
 			setAnimationAtk(loadAnimation(battleSpriteSheetEpee[i], 1, 5, 4), 2);
@@ -122,7 +111,7 @@ public class Guerrier extends Personnage {
 			setAnimationDef(loadAnimation(battleSpriteSheetBouclier[i], 1, 5, 4), 2);
 			setAnimationDef(loadAnimation(battleSpriteSheetBouclier[i], 1, 5, 4), 3);
 			setAnimationDef(loadAnimation(battleSpriteSheetBouclier[i], 1, 5, 4), 4);			
-		}
+		}*/
 	}
 	
 	public void renderWalkCycle (Graphics g) throws SlickException{

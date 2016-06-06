@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.ring.capacites.Capacite;
 import fr.ring.gui.battle.BattleController.BattleCommand;
-import fr.ring.gui.battle.BattleGameState;
+
 
 public abstract class IA extends Personnage {
 

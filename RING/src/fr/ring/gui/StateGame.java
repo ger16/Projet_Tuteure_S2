@@ -6,6 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.ring.gui.battle.BattleGameState;
+import fr.ring.gui.battle.GameOverGameState;
+import fr.ring.gui.battle.VictoryGameState;
 import fr.ring.gui.map.MapGameState;
 
 public class StateGame extends StateBasedGame {
@@ -20,8 +22,11 @@ public class StateGame extends StateBasedGame {
 		addState(new NameAssignState());
 		addState(new CreateCharacterGameState());
 		addState(new SkillAssignmentGameState());
+		addState(new LoadCharacterGameState());
 		addState(new MapGameState());
 		addState(new BattleGameState());
+		addState(new GameOverGameState());
+		addState(new VictoryGameState());
 
 	}
 	

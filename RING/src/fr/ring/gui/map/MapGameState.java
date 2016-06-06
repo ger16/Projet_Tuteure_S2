@@ -4,6 +4,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.NameAssignState;
 import fr.ring.personnage.*;
 
 public class MapGameState extends BasicGameState{
@@ -28,6 +29,13 @@ public class MapGameState extends BasicGameState{
 		player.init();
 		PlayerController controller = new PlayerController(player, game);
 		container.getInput().addKeyListener(controller);		
+	}
+	
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		NameAssignState.enterName.setAcceptingInput(false);
+		player.setP(p);
+		player.init();
 	}
 
 	@Override

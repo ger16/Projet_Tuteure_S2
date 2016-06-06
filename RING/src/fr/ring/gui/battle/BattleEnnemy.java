@@ -19,16 +19,14 @@ public class BattleEnnemy {
 	}
 	
 	public void init () throws SlickException{
-		if(p instanceof Imp){
-			ennemy = ((Imp) p).getBattleSpriteSheetImp().getSubImage(0, 3).getScaledCopy(2);
-		}
+		ennemy = p.getBattleSpriteSheet()[0].getSubImage(0, 3).getScaledCopy(2);
 	}
 	
 	public void render(GameContainer container, Graphics g){
 		ennemy.drawCentered(container.getWidth() * 3 / 4, container.getHeight() / 2);
 		Font font = g.getFont();
-		String pv = Integer.toString((int)p.getVIT());
-	    font.drawString(container.getWidth() * 3 / 4 - font.getWidth(pv) / 2, container.getHeight() / 2 - ennemy.getHeight() / 2 - font.getLineHeight(), pv, Color.white);
+		String infos = p.getNom() + " pv:" +  Integer.toString((int)p.getVIT()) + " lvl: " + Integer.toString(p.getEXP());
+	    font.drawString(container.getWidth() * 3 / 4 - font.getWidth(infos) / 2, container.getHeight() / 2 - ennemy.getHeight() / 2 - font.getLineHeight(), infos, Color.white);
 	}
 
 	public Personnage getP() {

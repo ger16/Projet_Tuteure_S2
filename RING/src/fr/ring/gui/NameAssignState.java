@@ -1,33 +1,32 @@
 package fr.ring.gui;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.InputListener;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.InputAdapter;
 
+
+import fr.ring.gui.battle.BattleGameState;
+import fr.ring.gui.battle.BattlePlayer;
 import fr.ring.gui.map.MapGameState;
+
 
 public class NameAssignState extends BasicGameState{
 	
 	public static final int ID = 5, SPACE = 70;
+	public static TextField enterName;
 	
 	private StateBasedGame game;
 	private GameContainer container;
 	private Image background;
-	private UnicodeFont font;
-	private TextField enterName;
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -40,19 +39,19 @@ public class NameAssignState extends BasicGameState{
 		enterName.addListener(new ButtonListener());
 	}
 	
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		enterName.setText("");
+		enterName.setAcceptingInput(true);
+	}
+	
 	class ButtonListener implements  ComponentListener{
 
 		@Override
 		public void componentActivated(AbstractComponent arg0) {
 			enterName.setAcceptingInput(false);
 			MapGameState.p.setNom(enterName.getText());
-			try{
-				game.getState(MapGameState.ID).init(container, game);
-			}
-			catch(SlickException e){
-				e.getMessage();
-			}
-			game.enterState(MapGameState.ID);				
+			game.enterState(SkillAssignmentGameState.ID);				
 		}
 		
 	}

@@ -2,18 +2,21 @@ package fr.ring.capacites;
 
 public class BouleDeFeu extends SortAttaque {
 
+	public static final int PUI_BOULE_DE_FEU = 70, FAC_BOULE_DE_FEU = 30;	
+	public static final String NOM_BOULE_DE_FEU = "BouleDeFeu";
+	
 	public BouleDeFeu() {
-		// TODO Auto-generated constructor stub
+		this.nom = NOM_BOULE_DE_FEU;
+		this.PUI = PUI_BOULE_DE_FEU;
+		this.FAC = FAC_BOULE_DE_FEU;
 	}
 
 	public BouleDeFeu(String nom, double pBA, double eFF, int PUI, int FAC) {
 		super(nom, pBA, eFF, PUI, FAC);
-		// TODO Auto-generated constructor stub
 	}
 
-	public BouleDeFeu(SortAttaque s) {
-		super(s);
-		// TODO Auto-generated constructor stub
+	public BouleDeFeu(BouleDeFeu b) {
+		super(b);
 	}
 
 }
