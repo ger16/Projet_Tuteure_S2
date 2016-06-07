@@ -7,9 +7,9 @@ public class TestHeros{
 
 	public static void main(String[] args) {
 		
-		Guerrier heroG = new Guerrier ("GerryBoy", 50, 40, 29, 18, new ArrayList<Capacite>(), 1, 300, 300);
-		Mage heroM = new Mage ("Jaina", 10, 15, 35, 30, new ArrayList<Capacite>(), 1, 300, 300);
-		Chasseur heroC = new Chasseur ("Huntard", 20, 20, 20, 20, new ArrayList<Capacite>(), 1, 300, 300);
+		Guerrier heroG = new Guerrier ("GerryBoy", 50, 40, 29, 18, new ArrayList<Capacite>(), 0, 1, 300, 300);
+		Mage heroM = new Mage ("Jaina", 10, 15, 35, 30, new ArrayList<Capacite>() ,0, 1, 300, 300);
+		Chasseur heroC = new Chasseur ("Huntard", 20, 20, 20, 20, new ArrayList<Capacite>(), 0, 1, 300, 300);
 	
 		// test du toString
 		System.out.println("Test du toString\n");

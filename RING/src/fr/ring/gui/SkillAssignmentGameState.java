@@ -45,6 +45,10 @@ public class SkillAssignmentGameState extends BasicGameState {
 	
 	private MouseOverArea terminerButton;
 	
+	private int OLD_FOR;
+	private int OLD_DEX;
+	private int OLD_INT;
+	private int OLD_CON;	
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -71,6 +75,14 @@ public class SkillAssignmentGameState extends BasicGameState {
 		
 	}
 	
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		 OLD_FOR = MapGameState.p.getFOR(); 
+		 OLD_DEX = MapGameState.p.getDEX();
+		 OLD_INT = MapGameState.p.getINT();
+		 OLD_CON = MapGameState.p.getCON();	
+	}
+	
 	public int getXCentre(GameContainer container, Image buttonImage){
 		return container.getWidth() / 2 - buttonImage.getWidth() / 2;
 	}
@@ -88,10 +100,6 @@ public class SkillAssignmentGameState extends BasicGameState {
 	
 	class ButtonListener implements ComponentListener{
 		private int val;
-		private int OLD_FOR = MapGameState.p.getFOR(); 
-		private int OLD_DEX = MapGameState.p.getDEX();
-		private int OLD_INT = MapGameState.p.getINT();
-		private int OLD_CON = MapGameState.p.getCON();
 		
 		public ButtonListener(int val){
 			this.val = val;			
@@ -125,11 +133,11 @@ public class SkillAssignmentGameState extends BasicGameState {
 					MapGameState.p.setDEX(MapGameState.p.getDEX() - 1);
 				break;
 			case REM_INT :
-				if(MapGameState.p.getFOR() - 1 >= OLD_FOR)	
+				if(MapGameState.p.getFOR() - 1 >= OLD_INT)	
 					MapGameState.p.setINT(MapGameState.p.getINT() - 1);
 				break;
 			case REM_CON :
-				if(MapGameState.p.getFOR() - 1 >= OLD_FOR)	
+				if(MapGameState.p.getFOR() - 1 >= OLD_CON)	
 					MapGameState.p.setCON(MapGameState.p.getCON() - 1);
 				break;
 			case TERMINER :

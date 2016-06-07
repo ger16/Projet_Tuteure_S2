@@ -25,9 +25,9 @@ public class BattleController implements InputProviderListener{
 	
 	public static int nbTours = 0;
 	public static ArrayList<Capacite> capButton = new ArrayList<Capacite>();
+	public static double atk = 0;
 	
 	private BattleHud hud;	
-	private double atk = 0;
 	private Capacite capAtk;
 	private BattlePlayer player;
 	private BattleEnnemy ennemy;
@@ -84,6 +84,7 @@ public class BattleController implements InputProviderListener{
 				BattleGameState.defenseProvider.clearCommand(BattleCommand.VOIR_ATTAQUE);
 				BattleGameState.defenseProvider.unbindCommand(kF1);
 				BattleGameState.defenseProvider.unbindCommand(kF2);
+				hud.addLog("Degats de l'attaque adverse : " + atk);
 				hud.addLog("Appuyez sur F1 pour vous defendre ou sur F2 pour encaisser l'attaque puis attaquer en retour");
 				BattleGameState.defenseProvider.bindCommand(kF1, BattleCommand.REDUCED_DEFEND);
 				BattleGameState.defenseProvider.bindCommand(kF2, BattleCommand.REDUCED_ATTACK);
@@ -180,17 +181,13 @@ public class BattleController implements InputProviderListener{
 			break;
 		case DEFEND: 
 			if(p instanceof IA){
-				if(atk == 0){
-					hud.addLog("Defense le vent");
-				}
-				else{
-					resolutionDefense(p, atk, p.getCAP().get(0));
-					hud.addLog(p.getNom() + " s'est defendu !");
-				}
+				resolutionDefense(p, atk, p.getCAP().get(0));
+				hud.addLog(p.getNom() + " s'est defendu !");
 			}
 			else{
 				if(atk == 0){
 					hud.addLog("Il n'y a pas eu d'attaque precedemment");
+					BattleController.nbTours --;
 				}
 				else{
 					BattleGameState.provider.setActive(false);
@@ -203,23 +200,24 @@ public class BattleController implements InputProviderListener{
 		case HEAL:
 			if(p instanceof IA){
 				resolutionSoin(p, p.getCAP().get(1));
-				hud.addLog(p.getNom() + " s'est soigne !");
 			}
 			else{
-				BattleGameState.provider.setActive(false);
 				initCapButton(p, "Soin");
-				cc = new CapController(p, (BattleCommand)command);
-				BattleGameState.capProvider.addListener(cc);
+				if(BattleController.capButton.isEmpty()){
+					hud.addLog("Vous n'avez pas de sort de soin");
+					BattleController.nbTours--;
+				}	
+				else{
+					BattleGameState.provider.setActive(false);
+					cc = new CapController(p, (BattleCommand)command);
+					BattleGameState.capProvider.addListener(cc);
+				}
 			}
 			break;
 		case SURRENDER:
 			MapGameState.p = player.getP();
-			try {
-				game.getState(GameOverGameState.ID).init(container, game);
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-			game.enterState(MapGameState.ID);break;
+			game.enterState(GameOverGameState.ID);
+			break;
 		default: break;
 		}
 		if(p.equals(player.getP()))
@@ -244,15 +242,15 @@ public class BattleController implements InputProviderListener{
 	
 	public void capControlPressedAction(Personnage p, IA ia, BattleCommand bc, int i){
 		if(bc == BattleCommand.ATTACK){
-			atk = resolutionAttaque(p, BattleController.capButton.get(0));
-			capAtk = BattleController.capButton.get(0);
+			atk = resolutionAttaque(p, BattleController.capButton.get(i));
+			capAtk = BattleController.capButton.get(i);
 			controlPressed(ia.IAprocess(bc));
 			BattleGameState.capProvider.removeListener(cc);
 			cleanCapButton();
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.DEFEND){
-			resolutionDefense(p, atk, BattleController.capButton.get(0));
+			resolutionDefense(p, atk, BattleController.capButton.get(i));
 			controlPressed(ia.IAprocess(bc));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
@@ -260,7 +258,7 @@ public class BattleController implements InputProviderListener{
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.REDUCED_DEFEND){
-			resolutionDefenseDiminuee(p, atk, BattleController.capButton.get(0));
+			resolutionDefenseDiminuee(p, atk, BattleController.capButton.get(i));
 			controlPressed(ia.IAprocess(BattleCommand.DEFEND));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
@@ -268,7 +266,7 @@ public class BattleController implements InputProviderListener{
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.REDUCED_ATTACK){
-			resolutionAttaqueDiminuee(p, BattleController.capButton.get(0));
+			atk = resolutionAttaqueDiminuee(p, BattleController.capButton.get(i));
 			controlPressed(ia.IAprocess(BattleCommand.ATTACK));
 			BattleGameState.defenseProvider.removeListener(dc);
 			BattleGameState.capProvider.removeListener(cc);
@@ -276,7 +274,7 @@ public class BattleController implements InputProviderListener{
 			BattleGameState.provider.setActive(true);
 		}
 		else if(bc == BattleCommand.HEAL){
-			resolutionSoin(p, BattleController.capButton.get(0));
+			resolutionSoin(p, BattleController.capButton.get(i));
 			controlPressed(ia.IAprocess(BattleCommand.HEAL));
 			BattleGameState.capProvider.removeListener(cc);
 			cleanCapButton();
@@ -361,6 +359,11 @@ public class BattleController implements InputProviderListener{
 	
 	public double resolutionAttaque(Personnage p, Capacite c){
 		double EFF = 0;
+		if(p .equals(player.getP()))
+			this.player.getP().setVIT(this.player.getP().getVIT() - atk);
+		else
+			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - atk);
+		atk = 0;
 		if(c.attaquer(p))
 			EFF = c.efficaciteAttaque(p);
 	    if(EFF != 0)
@@ -378,6 +381,11 @@ public class BattleController implements InputProviderListener{
 	
 	public double resolutionAttaqueDiminuee(Personnage p, Capacite c){
 		double EFF = 0;
+		if(p .equals(player.getP()))
+			this.player.getP().setVIT(this.player.getP().getVIT() - atk);
+		else
+			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - atk);
+		atk = 0;
 		c.attaquer(p);
 		c.setPBA(c.getPBA() - c.getPBA()/4);
 		if(c.attaquer(p)){
@@ -405,6 +413,7 @@ public class BattleController implements InputProviderListener{
 			player.getP().setVIT(player.getP().getVIT() - (EFF_A - EFF_D));
 		else
 			ennemy.getP().setVIT(ennemy.getP().getVIT() - (EFF_A - EFF_D));
+		atk = 0;
 	    if(EFF_D != 0){
 	    	if(p instanceof IA)
 	    		hud.addLog(p.getNom() + " se defend");
@@ -427,9 +436,10 @@ public class BattleController implements InputProviderListener{
 			EFF_D -= EFF_D/4;
 		}
 		if(p .equals(player.getP()))
-			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
+			this.player.getP().setVIT(this.player.getP().getVIT() - (EFF_A - EFF_D));
 		else
-			this.player.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
+			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - (EFF_A - EFF_D));
+		atk = 0;
 	    if(EFF_D != 0){
 	    	if(p instanceof IA)
 	    		hud.addLog(p.getNom() + " se defend");
@@ -445,6 +455,11 @@ public class BattleController implements InputProviderListener{
 	
 	public double resolutionSoin(Personnage p, Capacite c){
 		double EFF = 0;
+		if(p .equals(player.getP()))
+			this.player.getP().setVIT(this.player.getP().getVIT() - atk);
+		else
+			this.ennemy.getP().setVIT(this.ennemy.getP().getVIT() - atk);
+		atk = 0;
 		if(c.seSoigner(p)){
 			EFF = c.efficaciteSoin(p);
 			p.setVIT(p.getVIT() + (int)EFF);

@@ -2,6 +2,7 @@ package fr.ring.gui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
@@ -40,8 +41,11 @@ public class LoadCharacterGameState extends BasicGameState {
 		buttonImage = new Image("fr/ring/gui/ressources/hud/hud_button.png");
 		loadCharacter = new ArrayList<MouseOverArea>();
 		f = new File("Sauvegarde");
+		if(!f.exists()){
+			f.mkdir();
+		}
 		for(int i=0; i < f.listFiles().length; i++)	
-			loadCharacter.add(new MouseOverArea(container, buttonImage, getXCentre(container, buttonImage) , getYCentre(container, buttonImage) - SPACE * i, new ButtonListener(f.listFiles()[i].getName().split(".txt")[0])));
+			loadCharacter.add(new MouseOverArea(container, buttonImage, getXCentre(container, buttonImage) , getYCentre(container, buttonImage) - SPACE * i*10, new ButtonListener(f.listFiles()[i].getName().split(".txt")[0])));
 	}
 	
 	public int getXCentre(GameContainer container, Image buttonImage){

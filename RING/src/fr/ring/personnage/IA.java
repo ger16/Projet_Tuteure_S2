@@ -3,6 +3,7 @@ package fr.ring.personnage;
 import java.util.ArrayList;
 
 import fr.ring.capacites.Capacite;
+import fr.ring.gui.battle.BattleController;
 import fr.ring.gui.battle.BattleController.BattleCommand;
 
 
@@ -44,10 +45,16 @@ public abstract class IA extends Personnage {
 	public BattleCommand IAprocess(BattleCommand bc) {
 		switch(bc){
 		case ATTACK:
-			return BattleCommand.DEFEND;
+			if(BattleController.atk != 0)
+				return BattleCommand.DEFEND;
+			return BattleCommand.ATTACK;
 		case DEFEND:
+			if(getVIT() < getVITMax()/4)
+				return BattleCommand.HEAL;
 			return BattleCommand.ATTACK;
 		case HEAL:
+			if(getVIT() < getVITMax()/4)
+				return BattleCommand.HEAL;
 			return BattleCommand.ATTACK;
 		default:
 			return null;	

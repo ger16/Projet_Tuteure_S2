@@ -8,6 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.ring.gui.battle.BattleGameState;
 import fr.ring.personnage.IA;
 import fr.ring.personnage.Imp;
+import fr.ring.personnage.Personnage;
 import fr.ring.capacites.*;
 
 public class TriggerController {
@@ -69,6 +70,10 @@ public class TriggerController {
 			&& player.getP().getY() > map.getObjectY(id)
 			&& player.getP().getY() < map.getObjectY(id) + map.getObjectHeight(id);
 	}	
+	
+	public static void exitTrigger(Personnage p){
+		p.setY(p.getY() + 75.0f);
+	}
 	
 	private void teleport(int objectID) {
 		player.getP().setX(Float.parseFloat(map.getObjectProperty(objectID, "dest-x", Float.toString(player.getP().getX()))));

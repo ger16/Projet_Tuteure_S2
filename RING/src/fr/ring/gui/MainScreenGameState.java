@@ -1,5 +1,7 @@
 package fr.ring.gui;
 
+import java.io.IOException;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -78,7 +80,14 @@ public class MainScreenGameState extends BasicGameState {
 			switch(val){
 			case JOUER : game.enterState(LoadCharacterGameState.ID);break;
 			case CREER_PERSONNAGE : game.enterState(CreateCharacterGameState.ID);break;
-			case QUITTER : container.exit();break;
+			case QUITTER : 
+				try {
+					MapGameState.p.sauvergarderHero();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				container.exit();
+				break;
 			}
 		}
 		

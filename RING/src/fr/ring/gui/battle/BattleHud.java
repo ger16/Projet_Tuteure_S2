@@ -39,10 +39,10 @@ public class BattleHud {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException{
 		this.game = game;
 		Image buttonImage = new Image("fr/ring/gui/ressources/hud/hud_button.png");
-		attackButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 5, new ButtonListener(ATTAQUER));
-		defendButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 4, new ButtonListener(DEFENDRE));
-		healButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 3, new ButtonListener(SOIGNER));
-		surrenderButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 2, new ButtonListener(CAPITULER));
+		attackButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 5);
+		defendButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 4);
+		healButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 3);
+		surrenderButton = new MouseOverArea(container, buttonImage, SPACE, container.getHeight() - (buttonImage.getHeight() + SPACE*4) * 2);
 		log = new TextArea(attackButton.getWidth() + SPACE * 3, attackButton.getY(), container.getWidth() - attackButton.getWidth() - SPACE * 3, buttonImage.getHeight() * 3 + SPACE * 5);
 		log.setBottomUp(true);
 		log.setDefaultFont(container.getDefaultFont());
@@ -53,13 +53,13 @@ public class BattleHud {
 	public void render(GameContainer container, Graphics g){
 		g.setColor(Color.black);
 		attackButton.render(container, g);
-		g.drawString("Attaquer", attackButton.getX() + X_PADDING, attackButton.getY() + Y_PADDING);
+		g.drawString("A : Attaquer", attackButton.getX() + X_PADDING, attackButton.getY() + Y_PADDING);
 		defendButton.render(container, g);
-		g.drawString("Defendre", defendButton.getX() + X_PADDING, defendButton.getY() + Y_PADDING);
+		g.drawString("D : Defendre", defendButton.getX() + X_PADDING, defendButton.getY() + Y_PADDING);
 		healButton.render(container, g);
-		g.drawString("Soigner", healButton.getX() + X_PADDING, healButton.getY() + Y_PADDING);
+		g.drawString("S : Soigner", healButton.getX() + X_PADDING, healButton.getY() + Y_PADDING);
 		surrenderButton.render(container, g);
-		g.drawString("Capituler", surrenderButton.getX() + X_PADDING, surrenderButton.getY() + Y_PADDING);
+		g.drawString("C : Capituler", surrenderButton.getX() + X_PADDING, surrenderButton.getY() + Y_PADDING);
 		log.render();
 	}
 	

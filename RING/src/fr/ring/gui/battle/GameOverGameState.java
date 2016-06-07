@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.command.Command;
 import org.newdawn.slick.command.InputProvider;
@@ -14,7 +15,9 @@ import org.newdawn.slick.command.InputProviderListener;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.ring.gui.SkillAssignmentGameState;
 import fr.ring.gui.map.MapGameState;
+import fr.ring.gui.map.TriggerController;
 import fr.ring.personnage.Personnage;
 
 import shionn.slick.ui.TextArea;
@@ -96,6 +99,7 @@ public class GameOverGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		this.game = game;
 		background = new Image("fr/ring/gui/ressources/map/background/defeatScreen.jpg");
 		log = new TextArea(container.getWidth()/3 + SPACE * 10, container.getHeight()/2, container.getWidth()/2, container.getHeight()/3);
 		log.setBottomUp(true);
@@ -110,7 +114,7 @@ public class GameOverGameState extends BasicGameState {
 		}
 		
 		else{
-			addLog("Vous avez capitule, votre experience et vos aptitudes seront affectes en consequence");
+			addLog("Vous avez capitule, votre experience et vos aptitudes seront affectes en consequence, appuyez sur ENTREE");
 			if(MapGameState.p.getEXP() > 1){	
 				Random rand = new Random();
 				switch(rand.nextInt(4)){
@@ -135,6 +139,15 @@ public class GameOverGameState extends BasicGameState {
 				MapGameState.p.sauvergarderHero();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void keyPressed(int key, char c){
+		if(key == Input.KEY_ENTER){
+			if(!MapGameState.p.isDead()){
+				TriggerController.exitTrigger(MapGameState.p);
+				game.enterState(MapGameState.ID);
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import fr.ring.capacites.*;
+import fr.ring.gui.SkillAssignmentGameState;
 
 public abstract class Personnage {
 	public static final int TETE = 0, CEINTURE = 1, TORSE = 2, JAMBES = 3, PIEDS = 4 ,CORPS = 5;
@@ -55,13 +56,14 @@ public abstract class Personnage {
 		CAP = cAP;
 	}
 	
-	public Personnage(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, int eXP, float x, float y){
+	public Personnage(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP,double vIT, int eXP, float x, float y){
 		this.nom = nom;
 		FOR = fOR;
 		DEX = dEX;
 		INT = iNT;
 		CON = cON;
 		CAP = cAP;
+		VIT = vIT;
 		EXP = eXP;
 		this.x = x;
 		this.y = y;
@@ -189,6 +191,7 @@ public abstract class Personnage {
 		w.println(getDEX());
 		w.println(getINT());
 		w.println(getCON());
+		w.println(getVIT());
 		w.println(getEXP());
 		w.println(getX());
 		w.println(getY());
@@ -214,6 +217,7 @@ public abstract class Personnage {
 		int dEX= Integer.parseInt(sc.nextLine());
 		int iNT= Integer.parseInt(sc.nextLine());
 		int cON= Integer.parseInt(sc.nextLine());
+		double vIT= Double.parseDouble(sc.nextLine());
 		int eXP= Integer.parseInt(sc.nextLine());
 		Float xL= Float.parseFloat(sc.nextLine());
 		Float yL= Float.parseFloat(sc.nextLine());
@@ -221,13 +225,13 @@ public abstract class Personnage {
 			chargedCap.add(Capacite.getCapA(sc.nextLine()));
 		}while(sc.hasNextLine());
 		sc.close();
-		
+		SkillAssignmentGameState.SKILL_LVL_MAX = fOR + dEX + iNT + cON;
 		if (type.equals("Mage"))
-			return new Mage (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);
+			return new Mage (nom,fOR,dEX,iNT,cON, chargedCap,vIT, eXP, xL, yL);
 		if (type.equals("Guerrier"))
-			return new Guerrier (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);
+			return new Guerrier (nom,fOR,dEX,iNT,cON, chargedCap, vIT, eXP, xL, yL);
 		if (type.equals("Chasseur"))
-			return new Chasseur (nom,fOR,dEX,iNT,cON, chargedCap, eXP, xL, yL);	
+			return new Chasseur (nom,fOR,dEX,iNT,cON, chargedCap, vIT, eXP, xL, yL);	
 		return null;
 	}
 	public float getX() {

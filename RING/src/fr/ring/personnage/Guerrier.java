@@ -28,8 +28,8 @@ public class Guerrier extends Personnage {
 			getCAP().add(new Ecu());
 	}
 
-	public Guerrier(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, int eXP, float x, float y){
-		super(nom, fOR, dEX, iNT, cON, cAP, eXP, x, y);
+	public Guerrier(String nom, int fOR, int dEX, int iNT, int cON, ArrayList<Capacite> cAP, double vIT, int eXP, float x, float y){
+		super(nom, fOR, dEX, iNT, cON, cAP, vIT, eXP, x, y);
 		
 	}
 
